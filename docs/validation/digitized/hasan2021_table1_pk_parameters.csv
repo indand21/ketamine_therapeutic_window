@@ -1,0 +1,22 @@
+# source,"Hasan 2021 Anesthesiology 135(2):326-339, Table 1"
+# doi,10.1097/ALN.0000000000003829
+# n,15 healthy subjects
+analyte,isomer,regimen,parameter,value,sd,unit
+ketamine,S,IV 5mg,Cmax,15.6,4.5,ng/mL
+ketamine,R,IV 5mg,Cmax,16.5,4.9,ng/mL
+ketamine,S,IV 5mg,Vdss,6.6,2.2,L/kg
+ketamine,R,IV 5mg,Vdss,5.6,2.1,L/kg
+ketamine,S,IV 5mg,t_half,5.2,3.4,h
+ketamine,R,IV 5mg,t_half,6.1,3.1,h
+ketamine,S,IV 5mg,CL,1620,380,mL/min
+ketamine,R,IV 5mg,CL,1530,380,mL/min
+HNK/KET,S,IV 5mg,AUC_ratio,1.7,0.8,ratio
+HNK/KET,R,IV 5mg,AUC_ratio,3.1,1.4,ratio
+ketamine,S,IV 5mg,renal_excretion,7,,%dose
+ketamine,R,IV 5mg,renal_excretion,17,,%dose
+ketamine,S,oral 40mg PR,F,15,8,%
+ketamine,R,oral 40mg PR,F,19,10,%
+ketamine,S,oral 40mg PR,t_half,11,4,h
+ketamine,R,oral 40mg PR,t_half,10,4,h
+HNK/KET,S,oral 40mg PR,AUC_ratio,18,11,ratio
+HNK/KET,R,oral 40mg PR,AUC_ratio,30,16,ratio

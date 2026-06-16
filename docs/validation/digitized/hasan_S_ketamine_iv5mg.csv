@@ -1,0 +1,15 @@
+# source,"Hasan 2021 Anesthesiology Fig 1 (S-ketamine, IV 5mg red line)"
+# method,autodigitize pixel extraction
+# y_axis_max,20.0
+# x_axis,time_h 0-48
+time_h,conc_ng_mL
+0.0,6.3924
+0.5,11.1392
+1.0,6.519
+2.0,3.2911
+4.0,1.6456
+6.0,0.8861
+8.0,0.5063
+12.0,0.3797
+16.0,0.3165
+24.0,0.2532

@@ -1,0 +1,25 @@
+# source,"Kamp 2020 Br J Anaesth 125(5):750-761, Fig 1 (p754)"
+# doi,10.1016/j.bja.2020.06.067
+# panel,kamp_a_S-ketamine_esketamine
+# species,KET_S
+# regimen,esketamine 0.5mg/kg
+# y_axis_max_nmol_per_mL,1.6
+# method,"pixel digitization, hard-coded calibrated template"
+time_h,conc_nmol_per_mL
+0.0,0.0284
+0.083,0.0711
+0.25,0.1279
+0.5,0.1888
+0.75,0.2223
+1.0,0.3208
+1.5,0.4355
+1.667,0.4812
+2.0,0.536
+2.083,0.8152
+2.5,0.9137
+3.0,1.0335
+3.083,0.7604
+3.167,0.5289
+3.5,0.4102
+4.0,0.3269
+5.0,0.2406

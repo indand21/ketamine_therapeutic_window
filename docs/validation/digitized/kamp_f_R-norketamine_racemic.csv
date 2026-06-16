@@ -1,0 +1,25 @@
+# source,"Kamp 2020 Br J Anaesth 125(5):750-761, Fig 1 (p754)"
+# doi,10.1016/j.bja.2020.06.067
+# panel,kamp_f_R-norketamine_racemic
+# species,NK_R
+# regimen,racemic 0.5mg/kg
+# y_axis_max_nmol_per_mL,1.4
+# method,"pixel digitization, hard-coded calibrated template"
+time_h,conc_nmol_per_mL
+0.0,0.0
+0.083,0.0
+0.25,0.024
+0.5,0.0515
+0.75,0.0915
+1.0,0.1386
+1.5,0.2239
+1.667,0.2807
+2.0,0.3642
+2.083,0.4113
+2.5,0.5525
+3.0,0.7586
+3.083,0.8217
+3.167,0.7675
+3.5,0.7409
+4.0,0.6734
+5.0,0.6041

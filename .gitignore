@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Generated outputs (reproducible: run scripts/regenerate_all.py then scripts/make_figures.py)
+results/
+figures/
+
+# OS
+.DS_Store
+Thumbs.db

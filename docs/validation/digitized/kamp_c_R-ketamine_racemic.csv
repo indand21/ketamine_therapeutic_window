@@ -1,0 +1,25 @@
+# source,"Kamp 2020 Br J Anaesth 125(5):750-761, Fig 1 (p754)"
+# doi,10.1016/j.bja.2020.06.067
+# panel,kamp_c_R-ketamine_racemic
+# species,KET_R
+# regimen,racemic 0.5mg/kg
+# y_axis_max_nmol_per_mL,1.6
+# method,"pixel digitization, hard-coded calibrated template"
+time_h,conc_nmol_per_mL
+0.0,0.0792
+0.083,0.0792
+0.25,0.1452
+0.5,0.2112
+0.75,0.2426
+1.0,0.3959
+1.5,0.4822
+1.667,0.5411
+2.0,0.597
+2.083,0.8731
+2.5,1.0203
+3.0,1.1492
+3.083,0.801
+3.167,0.5716
+3.5,0.4609
+4.0,0.3635
+5.0,0.2701

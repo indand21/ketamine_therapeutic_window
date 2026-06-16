@@ -1,0 +1,51 @@
+# L1 PBPK/PK default parameters — literature-derived values (WP1 popPK calibration
+# baseline). Replaces illustrative placeholders with values mapped from published
+# population PK models. See docs/L1_Parameter_Provenance.md for full derivation.
+#
+# Units: volume [L]; flow / clearance [L/h]; fractions [dimensionless].
+# Reference subject: 70 kg healthy adult, CYP2B6*1/*1 (wild-type).
+#
+# Primary sources:
+#   Perez-Ruixo et al. 2021, Clin Pharmacokinet (N=820, 12 trials) — CL, Vss, f_m
+#   Hasan et al. 2021, Anesthesiology (N=15, IV+oral) — enantiomer-specific Vdss, CL
+#   Kamp et al. 2020, Br J Anaesth (N=20, IV crossover) — multi-metabolite model
+#   Weiss & Siegmund 2022, Clin Pharmacol Drug Dev — HNK cascade steady-state
+#   Moaddel et al. 2023, iScience — paired CSF+plasma PK (Kp,uu)
+#   Schmidt & Holzgrabe 2024, Eur J Pharm Sci — unbound fractions
+
+volumes:        # V_i (TechSpec §2)
+  V_cen: 45.0       # central/plasma; Perez-Ruixo Vc inferred from Vc/F~200-300L, F=0.186
+  V_per: 707.0      # peripheral/tissue; Vdss_S − V_cen = 752 − 45 (Perez-Ruixo Vss)
+  V_vasc: 0.05      # brain vascular sub-compartment; anatomical (~50 mL)
+  V_ecf: 0.15       # brain ECF (PD driver); anatomical (~150 mL, ~10% of 1.4 kg brain)
+
+flows:          # Q_ij (TechSpec §3.1)
+  Q_per: 120.0    # central <-> peripheral distribution; derived from t½,α ~ 0.1-0.2 h
+
+clearances:     # enantiomer-resolved where applicable (TechSpec §3-§4)
+  # BBB transfer: central <-> brain_vasc (influx/efflux)
+  # Decomposed from Kp,uu=0.6 via: (CL_in/CL_out)×(CL_ecf_in/CL_ecf_out)=0.60
+  # Ratios: CL_in/CL_out=0.80, CL_ecf_in/CL_ecf_out=0.75
+  CL_in:        {S: 5.0, R: 5.0}     # cen -> brain_vasc influx; Kp,uu decomposition
+  CL_out:       {S: 6.25, R: 6.25}   # brain_vasc -> cen efflux; ratio 0.80
+  # BBB transfer: brain_vasc <-> ecf
+  CL_ecf_in:    {S: 4.0, R: 4.0}     # vasc -> ecf; Kp,uu decomposition
+  CL_ecf_out:   {S: 5.33, R: 5.33}   # ecf -> vasc; ratio 0.75
+  # Parent -> norketamine N-demethylation (enantioselective; TechSpec §3.2, §4)
+  # f_m_S = 0.54 (Perez-Ruixo FRn), f_m_R = 0.50
+  # CL_met_NK_S = 0.54 × 114 = 61.6; CL_met_NK_R = 0.50 × 107.6 = 53.8
+  CL_met_NK:    {S: 61.6, R: 53.8}
+  # NK -> HNK oxidation (enantioselective; TechSpec §3.2)
+  # Derived from Weiss & Siegmund steady-state HNK:KET cascade ratios
+  CL_met_HNK:   {S: 4.0, R: 4.5}
+  # Other (non-HNK) NK elimination; balance from f_m_HNK = 0.55
+  # CL_other = CL_met_HNK × (1/f_m_HNK − 1)
+  CL_other_NK:  {S: 3.27, R: 3.68}
+  # Terminal HNK elimination; derived from steady-state HNK:KET ~46× ratio
+  CL_out_HNK:   0.17
+
+fractions:      # dimensionless routing (TechSpec §3.2)
+  f_m: 0.54         # fraction of parent CL -> NK; Perez-Ruixo FRn = 54%
+  f_m_HNK: 0.55     # fraction of NK CL -> HNK; Weiss & Siegmund cascade
+
+Kp_uu_brain: 0.6   # unbound brain-to-plasma partition; Moaddel 2023 CSF/plasma ~0.4, fu=0.65

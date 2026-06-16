@@ -1,0 +1,25 @@
+# source,"Kamp 2020 Br J Anaesth 125(5):750-761, Fig 1 (p754)"
+# doi,10.1016/j.bja.2020.06.067
+# panel,kamp_i_R-DHNK_racemic
+# species,DHNK_R
+# regimen,racemic 0.5mg/kg
+# y_axis_max_nmol_per_mL,0.2
+# method,"pixel digitization, hard-coded calibrated template"
+time_h,conc_nmol_per_mL
+0.0,0.0
+0.083,0.0
+0.25,0.0014
+0.5,0.0028
+0.75,0.0071
+1.0,0.0124
+1.5,0.0211
+1.667,0.0272
+2.0,0.0363
+2.083,0.0414
+2.5,0.0552
+3.0,0.0756
+3.083,0.086
+3.167,0.0924
+3.5,0.1023
+4.0,0.1015
+5.0,0.1
