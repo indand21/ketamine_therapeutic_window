@@ -19,9 +19,11 @@ venv/
 env/
 .env
 
-# Generated outputs (reproducible: run scripts/regenerate_all.py then scripts/make_figures.py)
-results/
-figures/
+# Generated outputs are committed as a convenience snapshot so reviewers can see the
+# results and figures without re-running the pipeline. They remain fully regenerable
+# (scripts/regenerate_all.py, run_sobol.py, run_robustness.py, then make_figures.py).
+# Ignore only the build logs written alongside them.
+results/_*.txt
 
 # OS
 .DS_Store

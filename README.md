@@ -41,7 +41,8 @@ pip install -r requirements.txt
 
 All analyses read the current (corrected) parameters from the source code and write
 raw outputs to `results/` (CSV/JSON) and figures to `figures/` (PNG + TIFF, 300 dpi).
-Both directories are git-ignored because they are fully regenerable. Run from the
+Both directories are committed as a convenience snapshot so the outputs can be inspected
+without re-running, and both are fully regenerable by the pipeline below. Run from the
 repository root with `PYTHONPATH=.`:
 
 ```bash

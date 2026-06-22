@@ -1,0 +1,41 @@
+{
+  "n_pass": 5,
+  "n_total": 5,
+  "checks": [
+    {
+      "metric": "t\u00bd S-KET (Zhao_2012_0.5mg_kg_IV40)",
+      "value": 5.94556766970418,
+      "ref_low": 4.5,
+      "ref_high": 6.0,
+      "passed": true
+    },
+    {
+      "metric": "CL_total S-KET (Zhao_2012_0.5mg_kg_IV40)",
+      "value": 114.0573034117767,
+      "ref_low": 100.0,
+      "ref_high": 130.0,
+      "passed": true
+    },
+    {
+      "metric": "Vdss S-KET (Zhao_2012_0.5mg_kg_IV40) [anatomical]",
+      "value": 695.0,
+      "ref_low": 650.0,
+      "ref_high": 850.0,
+      "passed": true
+    },
+    {
+      "metric": "HNK:KET ratio @48h (Zhao_2012_0.5mg_kg_IV40)",
+      "value": 44.542388634817016,
+      "ref_low": 14.0,
+      "ref_high": 46.0,
+      "passed": true
+    },
+    {
+      "metric": "CL ratio S:R (Zhao_2012_0.5mg_kg_IV40)",
+      "value": 1.0595098304787822,
+      "ref_low": 1.06,
+      "ref_high": 1.5,
+      "passed": true
+    }
+  ]
+}
