@@ -1,0 +1,196 @@
+{
+  "toxic_threshold": 0.3,
+  "arms": [
+    {
+      "peak_brain_conc_mgL": 0.0,
+      "peak_B_pyr": 0.0,
+      "peak_B_int": 0.0,
+      "crosses_toxic_threshold": false,
+      "hours_above_threshold": 0.0,
+      "supra_threshold_exposure": 0.0,
+      "peak_psychotomimetic_burden": 0.0,
+      "arm": "Placebo"
+    },
+    {
+      "peak_brain_conc_mgL": 0.29540131938246367,
+      "peak_B_pyr": 0.33025309939509706,
+      "peak_B_int": 0.5616244979258954,
+      "crosses_toxic_threshold": true,
+      "hours_above_threshold": 0.48120300751879697,
+      "supra_threshold_exposure": 0.015541223423201604,
+      "peak_psychotomimetic_burden": 1.0,
+      "arm": "Bolus 0.5 mg/kg"
+    },
+    {
+      "peak_brain_conc_mgL": 0.5908026575723324,
+      "peak_B_pyr": 0.49732023134094466,
+      "peak_B_int": 0.720304249605469,
+      "crosses_toxic_threshold": true,
+      "hours_above_threshold": 0.7819548872180451,
+      "supra_threshold_exposure": 0.05780532665675385,
+      "peak_psychotomimetic_burden": 1.0,
+      "arm": "Bolus 1.0 mg/kg"
+    },
+    {
+      "peak_brain_conc_mgL": 0.1690963360063638,
+      "peak_B_pyr": 0.22165525118253718,
+      "peak_B_int": 0.42537106320641915,
+      "crosses_toxic_threshold": true,
+      "hours_above_threshold": 0.6616541353383458,
+      "supra_threshold_exposure": 0.004776850704701582,
+      "peak_psychotomimetic_burden": 1.0,
+      "arm": "Infusion 0.5 mg/kg over 40 min"
+    },
+    {
+      "peak_brain_conc_mgL": 0.04306003429121327,
+      "peak_B_pyr": 0.06769133673405354,
+      "peak_B_int": 0.15882080569221152,
+      "crosses_toxic_threshold": false,
+      "hours_above_threshold": 0.0,
+      "supra_threshold_exposure": 0.0,
+      "peak_psychotomimetic_burden": 0.2882504286401659,
+      "arm": "Infusion 0.5 mg/kg over 4 h"
+    },
+    {
+      "peak_brain_conc_mgL": 0.02528366569928505,
+      "peak_B_pyr": 0.040876006012758426,
+      "peak_B_int": 0.09977198183191202,
+      "crosses_toxic_threshold": false,
+      "hours_above_threshold": 0.0,
+      "supra_threshold_exposure": 0.0,
+      "peak_psychotomimetic_burden": 0.06604582124106312,
+      "arm": "Infusion 0.5 mg/kg over 8 h"
+    },
+    {
+      "peak_brain_conc_mgL": 0.02153001716858104,
+      "peak_B_pyr": 0.03503096153936434,
+      "peak_B_int": 0.08625721709500661,
+      "crosses_toxic_threshold": false,
+      "hours_above_threshold": 0.0,
+      "supra_threshold_exposure": 0.0,
+      "peak_psychotomimetic_burden": 0.019125214607262995,
+      "arm": "Infusion 0.25 mg/kg over 4 h"
+    },
+    {
+      "peak_brain_conc_mgL": 0.08612006849758513,
+      "peak_B_pyr": 0.1268016170441908,
+      "peak_B_int": 0.27412028197694166,
+      "crosses_toxic_threshold": false,
+      "hours_above_threshold": 0.0,
+      "supra_threshold_exposure": 0.0,
+      "peak_psychotomimetic_burden": 0.8265008562198141,
+      "arm": "Infusion 1.0 mg/kg over 4 h"
+    }
+  ],
+  "designs": {
+    "PODCAST-like": {
+      "arms": [
+        "Placebo",
+        "Bolus 0.5 mg/kg",
+        "Bolus 1.0 mg/kg"
+      ],
+      "n_arms": 3,
+      "n_arms_crossing_threshold": 2,
+      "n_active_arms_below_threshold": 0,
+      "log10_spread_peak_concentration": 0.30103000948916,
+      "log10_spread_supra_threshold_exposure": 0.5704826557410484,
+      "brackets_threshold_with_active_arms": false
+    },
+    "Proposed": {
+      "arms": [
+        "Placebo",
+        "Bolus 0.5 mg/kg",
+        "Infusion 0.5 mg/kg over 4 h",
+        "Infusion 1.0 mg/kg over 4 h",
+        "Bolus 1.0 mg/kg"
+      ],
+      "n_arms": 5,
+      "n_arms_crossing_threshold": 2,
+      "n_active_arms_below_threshold": 2,
+      "log10_spread_peak_concentration": 1.1373680688636558,
+      "log10_spread_supra_threshold_exposure": 0.5704826557410484,
+      "brackets_threshold_with_active_arms": true
+    }
+  },
+  "identifiability_requirements": [
+    {
+      "quantity": "pharmacokinetic disposition",
+      "measurement": "plasma S- and R-ketamine and norketamine concentrations, sparse sampling",
+      "design_requirement": "at least two regimens differing in infusion duration, so distribution and elimination are separately informed",
+      "identified_by_this_design": true
+    },
+    {
+      "quantity": "spreading depolarisation threshold gain, kappa",
+      "measurement": "electrocorticographic spreading depolarisation burden during and after drug exposure",
+      "design_requirement": "patients with invasive neuromonitoring (subarachnoid haemorrhage or traumatic brain injury), crossover on and off drug",
+      "identified_by_this_design": false,
+      "note": "requires the neuromonitoring sub-study; not obtainable in elective surgery"
+    },
+    {
+      "quantity": "interneuron toxic threshold, theta",
+      "measurement": "psychotomimetic score (for example the Clinician Administered Dissociative States Scale) time course",
+      "design_requirement": "arms bracketing the threshold, that is some arms with and some without supra-threshold occupancy",
+      "identified_by_this_design": true
+    },
+    {
+      "quantity": "toxic weight, Gamma/alpha",
+      "measurement": "delirium incidence and severity, plus the psychotomimetic score",
+      "design_requirement": "a wide spread of supra-threshold exposure across arms",
+      "identified_by_this_design": true
+    },
+    {
+      "quantity": "protective to excitotoxic ratio, beta/alpha",
+      "measurement": "the outcome endpoint together with the spreading depolarisation burden",
+      "design_requirement": "both arms of the balance measured in the same patients",
+      "identified_by_this_design": false,
+      "note": "requires the neuromonitoring sub-study"
+    }
+  ],
+  "sample_size": {
+    "contrast": "bolus versus dose-matched slow infusion, psychotomimetic readout",
+    "test": "two-sample comparison of means, two-sided, alpha 0.05",
+    "curve": [
+      {
+        "standardised_effect_size": 0.3,
+        "n_per_arm_90_power": 234.0,
+        "n_per_arm_80_power": 175.0
+      },
+      {
+        "standardised_effect_size": 0.4,
+        "n_per_arm_90_power": 132.0,
+        "n_per_arm_80_power": 99.0
+      },
+      {
+        "standardised_effect_size": 0.5,
+        "n_per_arm_90_power": 85.0,
+        "n_per_arm_80_power": 63.0
+      },
+      {
+        "standardised_effect_size": 0.6,
+        "n_per_arm_90_power": 59.0,
+        "n_per_arm_80_power": 44.0
+      },
+      {
+        "standardised_effect_size": 0.7,
+        "n_per_arm_90_power": 43.0,
+        "n_per_arm_80_power": 33.0
+      },
+      {
+        "standardised_effect_size": 0.8,
+        "n_per_arm_90_power": 33.0,
+        "n_per_arm_80_power": 25.0
+      },
+      {
+        "standardised_effect_size": 1.0,
+        "n_per_arm_90_power": 22.0,
+        "n_per_arm_80_power": 16.0
+      },
+      {
+        "standardised_effect_size": 1.2,
+        "n_per_arm_90_power": 15.0,
+        "n_per_arm_80_power": 11.0
+      }
+    ],
+    "note": "Reported against the standardised effect size because the mapping from the model's dimensionless burden to a clinical scale is precisely what the study would establish."
+  }
+}

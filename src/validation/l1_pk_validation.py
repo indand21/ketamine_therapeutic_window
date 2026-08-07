@@ -126,17 +126,31 @@ STANDARD_REGIMENS: dict[str, callable] = {
 
 @dataclass(frozen=True)
 class PKReference:
-    """Published reference ranges for key PK metrics."""
-    # S-KET terminal half-life [h]
-    t_half_s_ket: tuple[float, float] = (4.5, 6.0)       # Hasan 2021, Perez-Ruixo 2021
-    # Total clearance S-KET [L/h]
-    cl_total_s: tuple[float, float] = (100, 130)           # Perez-Ruixo: 114 L/h
-    # Volume of distribution at steady state S-KET [L]
-    vdss_s: tuple[float, float] = (650, 850)              # Hasan: 752 L
-    # HNK:KET steady-state concentration ratio (ECF / plasma)
-    hnk_ket_ratio_ss: tuple[float, float] = (14, 46)       # Weiss & Siegmund 2022
+    """Published reference ranges for key PK metrics.
+
+    Ranges are the mean +/- 1 SD of the INTRAVENOUS estimates tabulated by
+    Hasan 2021. They previously came from a population analysis of intranasal
+    esketamine, whose clearance and volume are apparent values (CL/F, Vss/F)
+    inflated by bioavailability; anchoring a validation band to those was an
+    error, and it is corrected here.
+
+    These are coarse sanity bands. The authoritative evidence that the
+    pharmacokinetic layer is adequate is the prediction error against digitized
+    concentration-time data, produced by scripts/run_l1_calibration.py and
+    scripts/run_pk_goodness_of_fit.py.
+    """
+    # S-KET terminal half-life [h]; Hasan 2021 i.v. 5.2 +/- 3.4
+    t_half_s_ket: tuple[float, float] = (1.8, 8.6)
+    # Total clearance S-KET [L/h]; Hasan 2021 i.v. 97.2 +/- 22.8
+    cl_total_s: tuple[float, float] = (74.4, 120.0)
+    # Vdss S-KET [L]; Hasan 2021 i.v. 6.6 +/- 2.2 L/kg at 70 kg
+    vdss_s: tuple[float, float] = (308.0, 616.0)
+    # HNK:KET steady-state concentration ratio (Weiss & Siegmund 2022).
+    # NOT a validation target: HNK was excluded from the calibration and feeds
+    # no downstream layer. Retained for reference only.
+    hnk_ket_ratio_ss: tuple[float, float] = (14, 46)
     # Enantiomer CL ratio S:R
-    cl_ratio_s_r: tuple[float, float] = (1.06, 1.50)      # Hasan 2021
+    cl_ratio_s_r: tuple[float, float] = (1.06, 1.50)
 
 
 DEFAULT_REF = PKReference()

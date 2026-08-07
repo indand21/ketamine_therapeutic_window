@@ -1,0 +1,401 @@
+{
+  "design": {
+    "calibration_set": "Kamp 2020, seven arterial curves, escalating intravenous infusion",
+    "external_set": "Hasan 2021, two venous curves, 5 mg intravenous racemate (held out)",
+    "objective": "mean squared natural-log residual plus Gaussian penalties on total clearance and steady-state volume from the Hasan 2021 intravenous arm",
+    "fixed_parameters": [
+      "CL_in",
+      "CL_out",
+      "CL_ecf_in",
+      "CL_ecf_out"
+    ],
+    "fixed_parameter_rationale": "no human brain concentration data identify these; their ratios set an unbound brain partition of 0.6",
+    "sr_clearance_ratio": 1.0588235294117647
+  },
+  "estimates": {
+    "V_cen": 49.71865244540923,
+    "V_per": 234.36750618225838,
+    "Q_per": 75.53605620374692,
+    "CL_parent_S": 92.65357311902447,
+    "f_NK": 0.5227735531370294,
+    "CL_NK_total_S": 6.836065236234166,
+    "f_HNK": 0.55,
+    "CL_out_HNK": 2.0
+  },
+  "derived": {
+    "CL_S": 92.65357311902447,
+    "CL_R": 87.50615239018978,
+    "Vss": 284.0861586276676,
+    "t_half_S_h": 4.08032908777894
+  },
+  "published_intravenous_reference": {
+    "CL_S_l_per_h": 97.2,
+    "CL_S_sd": 22.8,
+    "CL_R_l_per_h": 91.8,
+    "CL_R_sd": 22.8,
+    "Vss_S_l": 462.0,
+    "Vss_S_sd": 154.0,
+    "Vss_R_l": 392.0,
+    "Vss_R_sd": 147.0,
+    "t_half_S_h": 5.2,
+    "t_half_R_h": 6.1,
+    "source": "Hasan 2021, Anesthesiology 135(2):326-339 (N=15, IV 5 mg + oral 10-80 mg)"
+  },
+  "bootstrap": {
+    "n_requested": 200,
+    "n_successful": 200,
+    "intervals": {
+      "V_cen": {
+        "median": 50.196725024412615,
+        "ci_2.5": 45.48899243251006,
+        "ci_97.5": 57.28156751152555
+      },
+      "V_per": {
+        "median": 253.13801293299804,
+        "ci_2.5": 219.71407707754207,
+        "ci_97.5": 316.34062377725644
+      },
+      "Q_per": {
+        "median": 73.739298532388,
+        "ci_2.5": 56.49105194600847,
+        "ci_97.5": 86.05200828749626
+      },
+      "CL_parent_S": {
+        "median": 91.94270542947476,
+        "ci_2.5": 88.38454944747419,
+        "ci_97.5": 95.69803930804304
+      },
+      "f_NK": {
+        "median": 0.5263463044320287,
+        "ci_2.5": 0.5116675533425818,
+        "ci_97.5": 0.5445028247274897
+      },
+      "CL_NK_total_S": {
+        "median": 6.4221765586170605,
+        "ci_2.5": 5.113049921633411,
+        "ci_97.5": 7.333167878537605
+      },
+      "f_HNK": {
+        "median": 0.55,
+        "ci_2.5": 0.55,
+        "ci_97.5": 0.55
+      },
+      "CL_out_HNK": {
+        "median": 2.0,
+        "ci_2.5": 2.0,
+        "ci_97.5": 2.0
+      },
+      "CL_S": {
+        "median": 91.94270542947476,
+        "ci_2.5": 88.38454944747419,
+        "ci_97.5": 95.69803930804304
+      },
+      "CL_R": {
+        "median": 86.8347773500595,
+        "ci_2.5": 83.47429670039229,
+        "ci_97.5": 90.38148156870731
+      },
+      "Vss": {
+        "median": 303.0994699254012,
+        "ci_2.5": 268.58115127525497,
+        "ci_97.5": 375.44063305785954
+      },
+      "t_half_S_h": {
+        "median": 4.475569167285002,
+        "ci_2.5": 3.6195549119754005,
+        "ci_97.5": 6.514763190486412
+      }
+    }
+  },
+  "fit_quality": {
+    "before": {
+      "calibration": {
+        "n_curves": 6,
+        "n_points": 93,
+        "MAPE_percent": 52.003339094752434,
+        "RMSLE_log10": 0.3995183376949955,
+        "geometric_mean_ratio": 0.43278295784229526,
+        "fraction_within_2fold": 0.4731182795698925
+      },
+      "external": {
+        "n_curves": 2,
+        "n_points": 18,
+        "MAPE_percent": 31.138804884482646,
+        "RMSLE_log10": 0.2544987826770104,
+        "geometric_mean_ratio": 0.7641637596289479,
+        "fraction_within_2fold": 0.7222222222222222
+      },
+      "descriptive": {
+        "n_curves": 1,
+        "n_points": 15,
+        "MAPE_percent": 89.75390846525183,
+        "RMSLE_log10": 0.9982159007051279,
+        "geometric_mean_ratio": 0.10199572087366261,
+        "fraction_within_2fold": 0.0
+      },
+      "per_curve_calibration": [
+        {
+          "label": "S-ketamine, esketamine",
+          "species": "KET_S",
+          "n_points": 16,
+          "MPE_percent": -42.71516604019696,
+          "MAPE_percent": 42.71516604019696,
+          "RMSLE_log10": 0.25195303830278315,
+          "geometric_mean_ratio": 0.5726808468146676,
+          "fraction_within_2fold": 0.875,
+          "observed_Cmax_mgL": 0.24569395500000002,
+          "predicted_Cmax_mgL": 0.1451698994841702
+        },
+        {
+          "label": "S-ketamine, racemate",
+          "species": "KET_S",
+          "n_points": 16,
+          "MPE_percent": -41.99798965566592,
+          "MAPE_percent": 41.99798965566592,
+          "RMSLE_log10": 0.25492566677616463,
+          "geometric_mean_ratio": 0.5716274953839947,
+          "fraction_within_2fold": 0.8125,
+          "observed_Cmax_mgL": 0.248594261,
+          "predicted_Cmax_mgL": 0.14538262727767642
+        },
+        {
+          "label": "R-ketamine, racemate",
+          "species": "KET_R",
+          "n_points": 16,
+          "MPE_percent": -46.79475227215962,
+          "MAPE_percent": 46.79475227215962,
+          "RMSLE_log10": 0.2852253382310933,
+          "geometric_mean_ratio": 0.5295457937027319,
+          "fraction_within_2fold": 0.75,
+          "observed_Cmax_mgL": 0.273199316,
+          "predicted_Cmax_mgL": 0.1486855352801208
+        },
+        {
+          "label": "S-norketamine, esketamine",
+          "species": "NK_S",
+          "n_points": 15,
+          "MPE_percent": -66.49292911696347,
+          "MAPE_percent": 66.49292911696347,
+          "RMSLE_log10": 0.48420052391749135,
+          "geometric_mean_ratio": 0.34472028334481797,
+          "fraction_within_2fold": 0.13333333333333333,
+          "observed_Cmax_mgL": 0.16394973,
+          "predicted_Cmax_mgL": 0.047941421114799584
+        },
+        {
+          "label": "S-norketamine, racemate",
+          "species": "NK_S",
+          "n_points": 15,
+          "MPE_percent": -65.72295940613283,
+          "MAPE_percent": 65.72295940613283,
+          "RMSLE_log10": 0.4690874240602565,
+          "geometric_mean_ratio": 0.3650991557156992,
+          "fraction_within_2fold": 0.13333333333333333,
+          "observed_Cmax_mgL": 0.16175747,
+          "predicted_Cmax_mgL": 0.0480922784078792
+        },
+        {
+          "label": "R-norketamine, racemate",
+          "species": "NK_R",
+          "n_points": 15,
+          "MPE_percent": -73.32045892245,
+          "MAPE_percent": 73.32045892245,
+          "RMSLE_log10": 0.5579518352097106,
+          "geometric_mean_ratio": 0.2862898979877897,
+          "fraction_within_2fold": 0.06666666666666667,
+          "observed_Cmax_mgL": 0.18381429,
+          "predicted_Cmax_mgL": 0.04637302676235493
+        }
+      ],
+      "per_curve_external": [
+        {
+          "label": "S-ketamine, 5 mg i.v.",
+          "species": "KET_S",
+          "n_points": 9,
+          "MPE_percent": -8.967331844314756,
+          "MAPE_percent": 29.180590949967172,
+          "RMSLE_log10": 0.2605693270825232,
+          "geometric_mean_ratio": 0.7621411174006287,
+          "fraction_within_2fold": 0.6666666666666666,
+          "observed_Cmax_mgL": 0.0111392,
+          "predicted_Cmax_mgL": 0.014389684387098743
+        },
+        {
+          "label": "R-ketamine, 5 mg i.v.",
+          "species": "KET_R",
+          "n_points": 9,
+          "MPE_percent": 1.2715738829818084,
+          "MAPE_percent": 33.09701881899808,
+          "RMSLE_log10": 0.24827985530832214,
+          "geometric_mean_ratio": 0.7661917697366405,
+          "fraction_within_2fold": 0.7777777777777778,
+          "observed_Cmax_mgL": 0.0125633,
+          "predicted_Cmax_mgL": 0.01463182001032419
+        }
+      ],
+      "per_curve_descriptive": [
+        {
+          "label": "Hydroxynorketamine, racemate",
+          "species": "HNK",
+          "n_points": 15,
+          "MPE_percent": -89.75390846525183,
+          "MAPE_percent": 89.75390846525183,
+          "RMSLE_log10": 0.9982159007051279,
+          "geometric_mean_ratio": 0.10199572087366261,
+          "fraction_within_2fold": 0.0,
+          "observed_Cmax_mgL": 0.052014899999999996,
+          "predicted_Cmax_mgL": 0.009947222065932682
+        }
+      ]
+    },
+    "after": {
+      "calibration": {
+        "n_curves": 6,
+        "n_points": 93,
+        "MAPE_percent": 9.736126389762557,
+        "RMSLE_log10": 0.07986271771560227,
+        "geometric_mean_ratio": 0.9361829513577749,
+        "fraction_within_2fold": 1.0
+      },
+      "external": {
+        "n_curves": 2,
+        "n_points": 18,
+        "MAPE_percent": 27.918061639046183,
+        "RMSLE_log10": 0.30966114509151604,
+        "geometric_mean_ratio": 0.7428704201306363,
+        "fraction_within_2fold": 0.7222222222222222
+      },
+      "descriptive": {
+        "n_curves": 1,
+        "n_points": 15,
+        "MAPE_percent": 77.76896381542768,
+        "RMSLE_log10": 0.7178257694400366,
+        "geometric_mean_ratio": 0.2108227929889068,
+        "fraction_within_2fold": 0.06666666666666667
+      },
+      "per_curve_calibration": [
+        {
+          "label": "S-ketamine, esketamine",
+          "species": "KET_S",
+          "n_points": 16,
+          "MPE_percent": 5.0851529281652255,
+          "MAPE_percent": 11.077125284799525,
+          "RMSLE_log10": 0.086903496028976,
+          "geometric_mean_ratio": 0.9643554049644898,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.24569395500000002,
+          "predicted_Cmax_mgL": 0.26479897194153534
+        },
+        {
+          "label": "S-ketamine, racemate",
+          "species": "KET_S",
+          "n_points": 16,
+          "MPE_percent": 4.698558326252716,
+          "MAPE_percent": 10.364861702808465,
+          "RMSLE_log10": 0.08085651319482011,
+          "geometric_mean_ratio": 0.9624886814832474,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.248594261,
+          "predicted_Cmax_mgL": 0.2651007025336631
+        },
+        {
+          "label": "R-ketamine, racemate",
+          "species": "KET_R",
+          "n_points": 16,
+          "MPE_percent": -2.463404151222801,
+          "MAPE_percent": 10.304345117528564,
+          "RMSLE_log10": 0.09915204835989885,
+          "geometric_mean_ratio": 0.9012339904981755,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.273199316,
+          "predicted_Cmax_mgL": 0.2737767613104688
+        },
+        {
+          "label": "S-norketamine, esketamine",
+          "species": "NK_S",
+          "n_points": 15,
+          "MPE_percent": -2.4878618561100763,
+          "MAPE_percent": 5.679628663172654,
+          "RMSLE_log10": 0.03841540658074323,
+          "geometric_mean_ratio": 0.9685085984182995,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.16394973,
+          "predicted_Cmax_mgL": 0.1526413116727656
+        },
+        {
+          "label": "S-norketamine, racemate",
+          "species": "NK_S",
+          "n_points": 15,
+          "MPE_percent": -0.7034020444523533,
+          "MAPE_percent": 5.284101882935218,
+          "RMSLE_log10": 0.05413092334655402,
+          "geometric_mean_ratio": 1.0254883136829416,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.16175747,
+          "predicted_Cmax_mgL": 0.15323203453469753
+        },
+        {
+          "label": "R-norketamine, racemate",
+          "species": "NK_R",
+          "n_points": 15,
+          "MPE_percent": -18.522018944720646,
+          "MAPE_percent": 18.522018944720646,
+          "RMSLE_log10": 0.0980926551026431,
+          "geometric_mean_ratio": 0.8092834333969796,
+          "fraction_within_2fold": 1.0,
+          "observed_Cmax_mgL": 0.18381429,
+          "predicted_Cmax_mgL": 0.14922187566733522
+        }
+      ],
+      "per_curve_external": [
+        {
+          "label": "S-ketamine, 5 mg i.v.",
+          "species": "KET_S",
+          "n_points": 9,
+          "MPE_percent": -18.480001586609834,
+          "MAPE_percent": 26.781097716405398,
+          "RMSLE_log10": 0.3252227396749111,
+          "geometric_mean_ratio": 0.7316445382702643,
+          "fraction_within_2fold": 0.6666666666666666,
+          "observed_Cmax_mgL": 0.0111392,
+          "predicted_Cmax_mgL": 0.024653959827761404
+        },
+        {
+          "label": "R-ketamine, 5 mg i.v.",
+          "species": "KET_R",
+          "n_points": 9,
+          "MPE_percent": -15.488151312605833,
+          "MAPE_percent": 29.05502556168692,
+          "RMSLE_log10": 0.29327498897301646,
+          "geometric_mean_ratio": 0.7542685446812099,
+          "fraction_within_2fold": 0.7777777777777778,
+          "observed_Cmax_mgL": 0.0125633,
+          "predicted_Cmax_mgL": 0.025128129237783993
+        }
+      ],
+      "per_curve_descriptive": [
+        {
+          "label": "Hydroxynorketamine, racemate",
+          "species": "HNK",
+          "n_points": 15,
+          "MPE_percent": -77.76896381542767,
+          "MAPE_percent": 77.76896381542767,
+          "RMSLE_log10": 0.7178257694400366,
+          "geometric_mean_ratio": 0.2108227929889068,
+          "fraction_within_2fold": 0.06666666666666667,
+          "observed_Cmax_mgL": 0.052014899999999996,
+          "predicted_Cmax_mgL": 0.027753660541595223
+        }
+      ]
+    },
+    "note": "Prediction error computed on a simulation horizon set by the observations, so late observations are predicted rather than clamped. 'before' is the previous parameterisation, 'after' the calibrated one. The descriptive set is hydroxynorketamine, which was excluded from the calibration and feeds no downstream layer."
+  },
+  "theta": [
+    3.9063801634073454,
+    5.456890422591144,
+    4.324610107869357,
+    4.5288675177624125,
+    -1.2469725659956097,
+    1.9222123082496716
+  ]
+}

@@ -52,34 +52,36 @@ class ParamBound:
 
 # Parameters eligible for calibration with their bounds.
 # Bounds derived from literature uncertainty (see docs/L1_Parameter_Provenance.md).
+# Every default below equals the corresponding value in src/l1_pk/config.py, so
+# the identity point of this calibrator IS the shipped model. The disposition
+# values come from scripts/run_l1_calibration.py, which estimates them from
+# digitized human intravenous concentration-time data; bounds bracket the 95%
+# bootstrap intervals reported there, widened where the interval is narrow.
+# See docs/L1_Calibration.md.
 CALIBRATION_PARAMS: list[ParamBound] = [
-    # CL_out_HNK default must match the config value (2.0 L/h, tuned to the
-    # Weiss & Siegmund steady-state HNK:KET ratio). The old default 0.17 with a
-    # [0.01, 1.0] range excluded the validated value, so the calibration
-    # identity point gave HNK:KET ~101 instead of the in-range 44.5.
+    # Hydroxynorketamine parameters are FIXED in the shipped model, not
+    # estimated: hydroxynorketamine was excluded from the calibration and no
+    # downstream layer reads it. They are exposed here only so that the
+    # calibrator can be pointed at them deliberately.
     ParamBound("CL_out_HNK",   0.5,   5.0,   2.0),
-    # Q_per controls the terminal t½ in this reduced model: t½ is in the
-    # published 4.5-6 h window only for Q_per >~ 240. The previous bounds
-    # (60-200, default 120) sat ENTIRELY below that region, so every
-    # calibration was forced out of the model's validated configuration into
-    # t½ failure. Bounds now span Kamp's literature Q (~126) up through the
-    # config/validated value (250), default = config default.
-    ParamBound("Q_per",      120.0,  350.0,  250.0),
+    # Estimated: 75.54 l/h [56.5 to 86.1].
+    ParamBound("Q_per",       40.0,  350.0,  75.54),
+    # Blood-brain transfer: FIXED in the shipped model. No human dataset
+    # identifies these; their ratios set Kp,uu = 0.6.
     ParamBound("CL_in_S",      2.0,   10.0,   5.0),
     ParamBound("CL_out_S",     2.5,   12.5,   6.25),
     ParamBound("CL_ecf_in_S",  1.0,    8.0,   4.0),
     ParamBound("CL_ecf_out_S", 1.5,   10.0,   5.33),
-    ParamBound("CL_met_HNK_S", 1.0,    8.0,   4.0),
-    ParamBound("CL_met_HNK_R", 1.0,    8.0,   4.5),
-    ParamBound("CL_other_NK_S", 1.0,   6.0,   3.27),
-    ParamBound("CL_other_NK_R", 1.0,   6.0,   3.68),
-    # Central PK volumes (option a): primary lever for the KET Cmax gap. V_cen
-    # sets the peak (lower → higher Cmax); V_per drives distribution/terminal
-    # phase. Bounds keep anatomical Vdss = V_cen+V_per inside the published
-    # 650-850 L window and total CL untouched (CL stays at the literature value,
-    # so the optimizer cannot cheat Cmax by lowering clearance).
-    ParamBound("V_cen",       20.0,  100.0,  45.0),
-    ParamBound("V_per",      400.0,  800.0, 650.0),
+    # Total norketamine clearance, estimated: 6.836 l/h [5.11 to 7.33],
+    # applied to both enantiomers.
+    ParamBound("CL_met_HNK_S", 1.0,   12.0,   6.836),
+    ParamBound("CL_met_HNK_R", 1.0,   12.0,   6.836),
+    # Absorbed into CL_met_HNK by the shipped parameterisation.
+    ParamBound("CL_other_NK_S", 0.0,   6.0,   0.0),
+    ParamBound("CL_other_NK_R", 0.0,   6.0,   0.0),
+    # Estimated: V_cen 49.72 l [45.5 to 57.3], V_per 234.37 l [220 to 316].
+    ParamBound("V_cen",       20.0,  100.0,  49.72),
+    ParamBound("V_per",      100.0,  800.0, 234.37),
 ]
 
 # Default values array for initial guess

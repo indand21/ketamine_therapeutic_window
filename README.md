@@ -6,11 +6,15 @@ cortical NMDA receptors, and from there to a net injury readout. The model defin
 a narrow, mechanism-driven neuroprotective window and is used to explore how dose
 and delivery regimen (bolus vs infusion) shape the balance of benefit and harm.
 
-> **Scope and framing.** Several downstream (injury, occupancy, spreading
-> depolarization, and psychotomimetic) parameters are not calibrated against
-> clinical outcome data, so those outputs are in **arbitrary units** and are
-> intended to be read **qualitatively**. The model is hypothesis-generating, not a
-> source of quantitative dosing guidance.
+> **Scope and framing.** The pharmacokinetic layer is calibrated to digitized
+> human intravenous concentration-time data and evaluated on a held-out dataset
+> (`docs/L1_Calibration.md`). Several downstream (injury, occupancy, spreading
+> depolarization, and psychotomimetic) coefficients cannot be estimated from
+> available data, so those outputs are in **arbitrary units** and are intended to
+> be read **qualitatively**. `docs/Identifiability.md` states exactly which
+> coefficient combinations are estimable and what the conclusions do and do not
+> depend on. The model is hypothesis-generating, not a source of quantitative
+> dosing guidance.
 
 ## Model architecture
 
@@ -46,21 +50,36 @@ without re-running, and both are fully regenerable by the pipeline below. Run fr
 repository root with `PYTHONPATH=.`:
 
 ```bash
-# 1. Core results: PK validation, dose-response window, PODCAST arms, regimen,
-#    enantiomer, virtual population, CYP2B6, emergence, digitized overlays
+# 1. Calibrate the pharmacokinetic layer to digitized human data (slow: the
+#    bootstrap dominates)                       ->  results/l1_calibration.json
+PYTHONPATH=. python scripts/run_l1_calibration.py
+
+# 2. Core results: secondary PK parameters, dose-response window, PODCAST arms,
+#    regimen, enantiomer, virtual population, CYP2B6, emergence, overlays
 PYTHONPATH=. python scripts/regenerate_all.py
 
-# 2. Global variance-based (Sobol) sensitivity analysis  ->  results/sobol.json
+# 3. Identifiability of the injury layer and the critical toxic weight
+PYTHONPATH=. python scripts/run_identifiability.py
+
+# 4. Global variance-based (Sobol) sensitivity, with convergence sequence and
+#    second-order indices                                 ->  results/sobol.json
 PYTHONPATH=. python scripts/run_sobol.py
 
-# 3. Robustness of the window to the uncalibrated injury parameters  ->  results/robustness.json
-PYTHONPATH=. python scripts/run_robustness.py
+# 5. Prediction error against every digitized curve
+PYTHONPATH=. python scripts/run_pk_goodness_of_fit.py
 
-# 4. Publication figures  ->  figures/  (reads results/)
+# 6. Design of the study that would calibrate what remains unmeasured
+PYTHONPATH=. python scripts/run_prospective_design.py
+
+# 7. Publication figures  ->  figures/  (reads results/)
 PYTHONPATH=. python scripts/make_figures.py
 ```
 
-Step 4 depends on steps 1-3 having produced the corresponding `results/` files.
+Step 2 onwards read the calibrated parameters from `src/l1_pk/config.py`, which
+step 1 produces. Step 7 depends on the preceding steps having written the
+corresponding `results/` files. `scripts/run_robustness.py` is retained but
+superseded by `run_identifiability.py`, which answers the same question exactly
+rather than by sampling.
 
 ## Tests
 
@@ -69,7 +88,7 @@ PYTHONPATH=. python -m pytest
 ```
 
 The suite (141 tests) covers mass conservation, numerical stability, each model
-layer, PK structural validation, calibration, and the virtual-population / sensitivity
+layer, PK validation, calibration, and the virtual-population / sensitivity
 machinery.
 
 ## Data
@@ -81,9 +100,12 @@ digitization method and self-checks documented in that folder's `README.md`.
 ## Repository layout
 
 ```
-config/                    default L1 parameter reference (YAML)
+config/                    L1 parameter reference copy (YAML; config.py is authoritative)
+docs/                      technical specifications, parameter provenance, calibration
+                           and identifiability records (see docs/README.md)
 docs/validation/digitized/ digitized published PK data + provenance
-scripts/                   reproduction pipeline (regenerate, sobol, robustness, figures)
+scripts/                   reproduction pipeline (calibration, results, identifiability,
+                           sensitivity, goodness of fit, study design, figures)
 src/                       model source (layers L1-L5, PGx, VPop, GSA, validation)
 tests/                     unit and property tests
 ```

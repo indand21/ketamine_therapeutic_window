@@ -1,51 +1,73 @@
-# L1 PBPK/PK default parameters — literature-derived values (WP1 popPK calibration
-# baseline). Replaces illustrative placeholders with values mapped from published
-# population PK models. See docs/L1_Parameter_Provenance.md for full derivation.
+# L1 pharmacokinetic parameters — human-readable reference copy.
+#
+# NOT LOADED BY THE CODE. The single source of truth is src/l1_pk/config.py;
+# this file mirrors it so the values can be read without opening Python. If the
+# two ever disagree, config.py wins.
+#
+# Provenance. Disposition parameters are ESTIMATED by
+# scripts/run_l1_calibration.py from digitized human intravenous
+# concentration-time data (Kamp 2020: six arterial curves covering both parent
+# and both norketamine enantiomers, 93 observations), with weakly informative
+# penalties toward the intravenous estimates tabulated by Hasan 2021, and
+# evaluated on two withheld venous curves. 95% intervals are nonparametric
+# bootstrap over the calibration observations. Full detail: docs/L1_Calibration.md.
+#
+# They are NO LONGER taken from the population analysis of intranasal
+# esketamine used in earlier versions, whose clearance and volume are apparent
+# values (CL/F, Vss/F) inflated by bioavailability. Checked against intravenous
+# concentration-time data, that parameterisation underpredicted plasma ketamine
+# by roughly 40% and the metabolites by an order of magnitude.
 #
 # Units: volume [L]; flow / clearance [L/h]; fractions [dimensionless].
-# Reference subject: 70 kg healthy adult, CYP2B6*1/*1 (wild-type).
-#
-# Primary sources:
-#   Perez-Ruixo et al. 2021, Clin Pharmacokinet (N=820, 12 trials) — CL, Vss, f_m
-#   Hasan et al. 2021, Anesthesiology (N=15, IV+oral) — enantiomer-specific Vdss, CL
-#   Kamp et al. 2020, Br J Anaesth (N=20, IV crossover) — multi-metabolite model
-#   Weiss & Siegmund 2022, Clin Pharmacol Drug Dev — HNK cascade steady-state
-#   Moaddel et al. 2023, iScience — paired CSF+plasma PK (Kp,uu)
-#   Schmidt & Holzgrabe 2024, Eur J Pharm Sci — unbound fractions
+# Reference subject: 70 kg adult, CYP2B6*1/*1.
 
-volumes:        # V_i (TechSpec §2)
-  V_cen: 45.0       # central/plasma; Perez-Ruixo Vc inferred from Vc/F~200-300L, F=0.186
-  V_per: 707.0      # peripheral/tissue; Vdss_S − V_cen = 752 − 45 (Perez-Ruixo Vss)
-  V_vasc: 0.05      # brain vascular sub-compartment; anatomical (~50 mL)
-  V_ecf: 0.15       # brain ECF (PD driver); anatomical (~150 mL, ~10% of 1.4 kg brain)
+volumes:
+  V_cen: 49.72      # CALIBRATED [45.5 to 57.3]
+  V_per: 234.37     # CALIBRATED [220 to 316]; Vss = V_cen + V_per = 284 L
+  V_vasc: 0.05      # FIXED, anatomical (~50 mL)
+  V_ecf: 0.15       # FIXED, anatomical (~150 mL); the pharmacodynamic driver
 
-flows:          # Q_ij (TechSpec §3.1)
-  Q_per: 120.0    # central <-> peripheral distribution; derived from t½,α ~ 0.1-0.2 h
+flows:
+  Q_per: 75.54      # CALIBRATED [56.5 to 86.1]
 
-clearances:     # enantiomer-resolved where applicable (TechSpec §3-§4)
-  # BBB transfer: central <-> brain_vasc (influx/efflux)
-  # Decomposed from Kp,uu=0.6 via: (CL_in/CL_out)×(CL_ecf_in/CL_ecf_out)=0.60
-  # Ratios: CL_in/CL_out=0.80, CL_ecf_in/CL_ecf_out=0.75
-  CL_in:        {S: 5.0, R: 5.0}     # cen -> brain_vasc influx; Kp,uu decomposition
-  CL_out:       {S: 6.25, R: 6.25}   # brain_vasc -> cen efflux; ratio 0.80
-  # BBB transfer: brain_vasc <-> ecf
-  CL_ecf_in:    {S: 4.0, R: 4.0}     # vasc -> ecf; Kp,uu decomposition
-  CL_ecf_out:   {S: 5.33, R: 5.33}   # ecf -> vasc; ratio 0.75
-  # Parent -> norketamine N-demethylation (enantioselective; TechSpec §3.2, §4)
-  # f_m_S = 0.54 (Perez-Ruixo FRn), f_m_R = 0.50
-  # CL_met_NK_S = 0.54 × 114 = 61.6; CL_met_NK_R = 0.50 × 107.6 = 53.8
-  CL_met_NK:    {S: 61.6, R: 53.8}
-  # NK -> HNK oxidation (enantioselective; TechSpec §3.2)
-  # Derived from Weiss & Siegmund steady-state HNK:KET cascade ratios
-  CL_met_HNK:   {S: 4.0, R: 4.5}
-  # Other (non-HNK) NK elimination; balance from f_m_HNK = 0.55
-  # CL_other = CL_met_HNK × (1/f_m_HNK − 1)
-  CL_other_NK:  {S: 3.27, R: 3.68}
-  # Terminal HNK elimination; derived from steady-state HNK:KET ~46× ratio
-  CL_out_HNK:   0.17
+clearances:
+  # Blood-brain transfer. FIXED: no available human dataset identifies these
+  # individually. Their ratios set Kp,uu = (5.0/6.25) x (4.0/5.33) = 0.60,
+  # consistent with the paired CSF data of Moaddel 2023.
+  CL_in:        {S: 5.0,  R: 5.0}
+  CL_out:       {S: 6.25, R: 6.25}
+  CL_ecf_in:    {S: 4.0,  R: 4.0}
+  CL_ecf_out:   {S: 5.33, R: 5.33}
 
-fractions:      # dimensionless routing (TechSpec §3.2)
-  f_m: 0.54         # fraction of parent CL -> NK; Perez-Ruixo FRn = 54%
-  f_m_HNK: 0.55     # fraction of NK CL -> HNK; Weiss & Siegmund cascade
+  # Total parent clearance, routed entirely through the N-demethylation node;
+  # the fraction f_m of it forms norketamine (see fractions below). This keeps
+  # parent elimination and metabolite formation non-redundant.
+  # CALIBRATED: S 92.65 [88.4 to 95.7]; R follows the published S:R ratio 1.059.
+  CL_met_NK:    {S: 92.65, R: 87.51}
+  CL_other_parent: {S: 0.0, R: 0.0}   # absorbed into CL_met_NK
 
-Kp_uu_brain: 0.6   # unbound brain-to-plasma partition; Moaddel 2023 CSF/plasma ~0.4, fu=0.65
+  # Total norketamine clearance; the fraction f_m_HNK of it forms HNK.
+  # CALIBRATED: 6.836 [5.11 to 7.33].
+  CL_met_HNK:   {S: 6.836, R: 6.836}
+  CL_other_NK:  {S: 0.0, R: 0.0}      # absorbed into CL_met_HNK
+
+  # Terminal hydroxynorketamine elimination. FIXED (Weiss & Siegmund 2022).
+  # HNK was excluded from the calibration and is read by no downstream layer;
+  # its concentrations should not be interpreted. See docs/L1_Calibration.md.
+  CL_out_HNK:   2.0
+
+fractions:
+  # CALIBRATED [0.512 to 0.545], estimated freely within 0.40 to 0.95. That it
+  # lands near the independently reported metabolic fraction is a check, not an
+  # input: no prior pinned it there.
+  f_m: 0.5228
+  f_m_HNK: 0.55     # FIXED (Weiss & Siegmund cascade)
+
+Kp_uu_brain: 0.6    # implied by the fixed blood-brain clearance ratios above
+
+# Derived secondary parameters, against the published intravenous estimates
+# (Hasan 2021 intravenous arm, mean +/- SD), as standardised differences:
+#   Total clearance, S-ketamine   92.7 L/h   vs  97.2 +/- 22.8   (-0.20 SD)
+#   Total clearance, R-ketamine   87.5 L/h   vs  91.8 +/- 22.8   (-0.19 SD)
+#   Terminal half-life, S          4.08 h    vs   5.2 +/- 3.4    (-0.33 SD)
+#   Steady-state volume            284 L     vs   462 +/- 154    (-1.16 SD)

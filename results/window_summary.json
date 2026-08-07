@@ -1,8 +1,8 @@
 {
-  "optimal_dose": 0.55,
-  "optimal_injury": 58.64907737487227,
+  "optimal_dose": 0.3,
+  "optimal_injury": 59.46612112046627,
   "window_lower": 0.05,
-  "window_upper": 0.75,
-  "window_width": 0.7,
+  "window_upper": 0.45,
+  "window_width": 0.4,
   "B_int_thresh": 0.3
 }

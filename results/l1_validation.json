@@ -1,41 +1,66 @@
 {
-  "n_pass": 5,
-  "n_total": 5,
-  "checks": [
+  "n_within_1_sd": 3,
+  "n_scored": 4,
+  "metrics": [
     {
-      "metric": "t\u00bd S-KET (Zhao_2012_0.5mg_kg_IV40)",
-      "value": 5.94556766970418,
-      "ref_low": 4.5,
-      "ref_high": 6.0,
-      "passed": true
+      "metric": "Terminal half-life, S-ketamine (h)",
+      "model": 4.080346967609085,
+      "published_mean": 5.2,
+      "published_sd": 3.4,
+      "standardised_difference": -0.32930971540909276,
+      "within_1_sd": true,
+      "source": "Hasan 2021, intravenous arm"
     },
     {
-      "metric": "CL_total S-KET (Zhao_2012_0.5mg_kg_IV40)",
-      "value": 114.0573034117767,
-      "ref_low": 100.0,
-      "ref_high": 130.0,
-      "passed": true
+      "metric": "Total clearance, S-ketamine (l/h)",
+      "model": 92.68337109760299,
+      "published_mean": 97.2,
+      "published_sd": 22.8,
+      "standardised_difference": -0.19809775887706213,
+      "within_1_sd": true,
+      "source": "Hasan 2021, intravenous arm"
     },
     {
-      "metric": "Vdss S-KET (Zhao_2012_0.5mg_kg_IV40) [anatomical]",
-      "value": 695.0,
-      "ref_low": 650.0,
-      "ref_high": 850.0,
-      "passed": true
+      "metric": "Total clearance, R-ketamine (l/h)",
+      "model": 87.53975286674198,
+      "published_mean": 91.8,
+      "published_sd": 22.8,
+      "standardised_difference": -0.1868529444411412,
+      "within_1_sd": true,
+      "source": "Hasan 2021, intravenous arm"
     },
     {
-      "metric": "HNK:KET ratio @48h (Zhao_2012_0.5mg_kg_IV40)",
-      "value": 44.542388634817016,
-      "ref_low": 14.0,
-      "ref_high": 46.0,
-      "passed": true
+      "metric": "Steady-state volume of distribution (l)",
+      "model": 284.09000000000003,
+      "published_mean": 462.0,
+      "published_sd": 154.0,
+      "standardised_difference": -1.15525974025974,
+      "within_1_sd": false,
+      "source": "Hasan 2021, intravenous arm"
     },
     {
-      "metric": "CL ratio S:R (Zhao_2012_0.5mg_kg_IV40)",
-      "value": 1.0595098304787822,
-      "ref_low": 1.06,
-      "ref_high": 1.5,
-      "passed": true
+      "metric": "Clearance ratio, S to R",
+      "model": 1.0587575137285448,
+      "published_mean": 1.0588235294117647,
+      "published_sd": null,
+      "standardised_difference": null,
+      "within_1_sd": null,
+      "source": "Hasan 2021, intravenous arm"
+    },
+    {
+      "metric": "Hydroxynorketamine to ketamine ratio at 48 h",
+      "model": 2218.0157962666267,
+      "published_mean": null,
+      "published_sd": null,
+      "published_range": [
+        14.0,
+        46.0
+      ],
+      "standardised_difference": null,
+      "within_1_sd": null,
+      "source": "Weiss and Siegmund 2022, steady-state ratios",
+      "note": "descriptive only: hydroxynorketamine was excluded from the calibration and feeds no downstream layer"
     }
-  ]
+  ],
+  "note": "The primary pharmacokinetic evidence is the prediction error in results/l1_calibration.json; this file reports secondary parameters against published intravenous estimates."
 }

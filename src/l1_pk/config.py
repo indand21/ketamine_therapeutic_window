@@ -46,19 +46,26 @@ UNIT_REGISTRY: dict[str, str] = {
 
 @dataclass(frozen=True)
 class CompartmentVolumes:
-    """Compartment volumes V_i [L] (TechSpec §2)."""
+    """Compartment volumes V_i [L] (TechSpec §2).
 
-    V_cen: float = 45.0   # central/plasma; Perez-Ruixo Vc inferred from Vc/F
-    V_per: float = 650.0  # peripheral; Kamp V2=115, adjusted for Hasan Vdss range
-    V_vasc: float = 0.05  # brain vascular sub-compartment (~50 mL)
-    V_ecf: float = 0.15   # brain ECF (PD driver; ~150 mL)
+    Central and peripheral volumes are ESTIMATED by scripts/run_l1_calibration.py
+    from digitized human intravenous concentration-time data; 95% bootstrap
+    intervals are in docs/L1_Calibration.md and results/l1_calibration.json.
+    They are no longer taken from the intranasal esketamine population analysis,
+    whose reported volume is an apparent value inflated by bioavailability.
+    """
+
+    V_cen: float = 49.72   # calibrated [45.5 to 57.3]
+    V_per: float = 234.37  # calibrated [220 to 316]; Vss = V_cen + V_per = 284 L
+    V_vasc: float = 0.05   # brain vascular sub-compartment (~50 mL), anatomical
+    V_ecf: float = 0.15    # brain ECF (PD driver; ~150 mL), anatomical
 
 
 @dataclass(frozen=True)
 class Flows:
     """Inter-compartmental flow Q_ij [L/h] (TechSpec §3.1)."""
 
-    Q_per: float = 250.0  # central <-> peripheral; Kamp Q=126, tuned for t½≈5-6h
+    Q_per: float = 75.54  # calibrated [56.5 to 86.1]
 
 
 @dataclass(frozen=True)
@@ -69,30 +76,37 @@ class Clearances:
     enantioselective clearance (TechSpec §3.2). genotype scaling theta_2B6(g)
     is applied externally by the PGx module onto ``CL_met_NK``.
 
-    Literature-derived values (May 2026): Perez-Ruixo 2021 (CL, Vss, f_m),
-    Hasan 2021 (enantiomer-specific Vdss/CL), Weiss & Siegmund 2022 (HNK
-    cascade), Moaddel 2023 (Kp,uu). See docs/L1_Parameter_Provenance.md.
+    Parent and norketamine clearances are ESTIMATED by
+    scripts/run_l1_calibration.py from digitized human intravenous
+    concentration-time data (Kamp 2020), with weakly informative penalties from
+    the Hasan 2021 intravenous arm. Blood-brain transfer clearances are FIXED:
+    no human dataset identifies them, and their ratios set Kp,uu = 0.6
+    (Moaddel 2023). Hydroxynorketamine parameters are FIXED at values
+    constrained by Weiss & Siegmund 2022; hydroxynorketamine was excluded from
+    the calibration and feeds no downstream layer. See docs/L1_Calibration.md.
     """
 
-    # BBB transfer central <-> brain_vasc.
+    # BBB transfer central <-> brain_vasc. FIXED, not identified by any data.
     # Kp,uu decomposition: (CL_in/CL_out)×(CL_ecf_in/CL_ecf_out) = 0.60
     CL_in: dict[str, float] = field(default_factory=lambda: {"S": 5.0, "R": 5.0})
     CL_out: dict[str, float] = field(default_factory=lambda: {"S": 6.25, "R": 6.25})
-    # BBB transfer brain_vasc <-> ecf.
+    # BBB transfer brain_vasc <-> ecf. FIXED.
     CL_ecf_in: dict[str, float] = field(default_factory=lambda: {"S": 4.0, "R": 4.0})
     CL_ecf_out: dict[str, float] = field(default_factory=lambda: {"S": 5.33, "R": 5.33})
-    # N-demethylation parent -> NK, enantioselective.
-    # f_m_S=0.54 × CL_S=114 = 61.6; f_m_R=0.50 × CL_R=107.6 = 53.8
-    CL_met_NK: dict[str, float] = field(default_factory=lambda: {"S": 61.6, "R": 53.8})
-    # Other (non-NK) parent elimination; CL_total = CL_met_NK / f_m
-    # CL_other_parent_S = 114.0 - 61.6 = 52.4; CL_other_parent_R = 107.6 - 53.8 = 53.8
-    CL_other_parent: dict[str, float] = field(default_factory=lambda: {"S": 52.4, "R": 53.8})
-    # NK -> HNK oxidation, enantioselective.
-    CL_met_HNK: dict[str, float] = field(default_factory=lambda: {"S": 4.0, "R": 4.5})
-    # Other (non-HNK) NK elimination.
-    CL_other_NK: dict[str, float] = field(default_factory=lambda: {"S": 3.27, "R": 3.68})
-    # Terminal HNK elimination; Kamp HNK CL=76.2 L/h (7-comp model);
-    # reduced to 2.0 L/h for 1-comp HNK model to match Weiss & Siegmund SS ratio.
+    # Total parent clearance, routed entirely through the N-demethylation node;
+    # the fraction f_m of it forms norketamine (see MetaboliteFractions). This
+    # parameterisation keeps parent elimination and metabolite formation
+    # non-redundant. CALIBRATED: S 92.65 [88.4 to 95.7]; R follows the published
+    # S:R clearance ratio of 1.059 (Hasan 2021 intravenous arm).
+    CL_met_NK: dict[str, float] = field(default_factory=lambda: {"S": 92.65, "R": 87.51})
+    # Absorbed into CL_met_NK by the parameterisation above.
+    CL_other_parent: dict[str, float] = field(default_factory=lambda: {"S": 0.0, "R": 0.0})
+    # Total norketamine clearance; the fraction f_m_HNK of it forms HNK.
+    # CALIBRATED: 6.836 [5.11 to 7.33]
+    CL_met_HNK: dict[str, float] = field(default_factory=lambda: {"S": 6.836, "R": 6.836})
+    # Absorbed into CL_met_HNK by the parameterisation above.
+    CL_other_NK: dict[str, float] = field(default_factory=lambda: {"S": 0.0, "R": 0.0})
+    # Terminal HNK elimination. FIXED to the Weiss & Siegmund steady-state ratio.
     CL_out_HNK: float = 2.0
 
 
@@ -100,8 +114,11 @@ class Clearances:
 class MetaboliteFractions:
     """Dimensionless metabolic routing fractions (TechSpec §3.2)."""
 
-    f_m: float = 0.54      # fraction of parent CL -> NK; Perez-Ruixo FRn=54%
-    f_m_HNK: float = 0.55  # fraction of NK CL -> HNK; Weiss & Siegmund cascade
+    # CALIBRATED [0.512 to 0.545], estimated freely within 0.40 to 0.95. That it
+    # lands near the independently reported metabolic fraction is a check, not an
+    # input: no prior pinned it there.
+    f_m: float = 0.5228
+    f_m_HNK: float = 0.55  # FIXED; Weiss & Siegmund cascade
 
 
 @dataclass(frozen=True)
