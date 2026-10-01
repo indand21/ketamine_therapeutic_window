@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="504pt" height="331.2pt" viewBox="0 0 504 331.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-02T00:43:31.744745</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 331.2 
+L 504 331.2 
+L 504 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 21.924222 59.584956 
+L 183.276066 59.584956 
+Q 189.25206 59.584956 189.25206 55.682562 
+L 189.25206 25.113807 
+Q 189.25206 21.211413 183.276066 21.211413 
+L 21.924222 21.211413 
+Q 15.948228 21.211413 15.948228 25.113807 
+L 15.948228 55.682562 
+Q 15.948228 59.584956 21.924222 59.584956 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #dddddd; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 21.924222 121.372865 
+L 183.276066 121.372865 
+Q 189.25206 121.372865 189.25206 117.470471 
+L 189.25206 80.397726 
+Q 189.25206 76.495332 183.276066 76.495332 
+L 21.924222 76.495332 
+Q 15.948228 76.495332 15.948228 80.397726 
+L 15.948228 117.470471 
+Q 15.948228 121.372865 21.924222 121.372865 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #56b4e9; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 21.924222 183.160774 
+L 183.276066 183.160774 
+Q 189.25206 183.160774 189.25206 179.25838 
+L 189.25206 142.185635 
+Q 189.25206 138.28324 183.276066 138.28324 
+L 21.924222 138.28324 
+Q 15.948228 138.28324 15.948228 142.185635 
+L 15.948228 179.25838 
+Q 15.948228 183.160774 21.924222 183.160774 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #f0e442; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 231.08402 137.632841 
+L 357.575898 137.632841 
+Q 363.551892 137.632841 363.551892 133.730447 
+L 363.551892 90.153711 
+Q 363.551892 86.251317 357.575898 86.251317 
+L 231.08402 86.251317 
+Q 225.108026 86.251317 225.108026 90.153711 
+L 225.108026 133.730447 
+Q 225.108026 137.632841 231.08402 137.632841 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #009e73; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 231.08402 225.436712 
+L 357.575898 225.436712 
+Q 363.551892 225.436712 363.551892 221.534317 
+L 363.551892 177.957582 
+Q 363.551892 174.055188 357.575898 174.055188 
+L 231.08402 174.055188 
+Q 225.108026 174.055188 225.108026 177.957582 
+L 225.108026 221.534317 
+Q 225.108026 225.436712 231.08402 225.436712 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #d55e00; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 405.383852 189.664764 
+L 487.055773 189.664764 
+Q 493.031768 189.664764 493.031768 185.76237 
+L 493.031768 142.185635 
+Q 493.031768 138.28324 487.055773 138.28324 
+L 405.383852 138.28324 
+Q 399.407858 138.28324 399.407858 142.185635 
+L 399.407858 185.76237 
+Q 399.407858 189.664764 405.383852 189.664764 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #e69f00; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 231.08402 293.728611 
+L 487.055773 293.728611 
+Q 493.031768 293.728611 493.031768 289.826217 
+L 493.031768 262.509457 
+Q 493.031768 258.607063 487.055773 258.607063 
+L 231.08402 258.607063 
+Q 225.108026 258.607063 225.108026 262.509457 
+L 225.108026 289.826217 
+Q 225.108026 293.728611 231.08402 293.728611 
+z
+" clip-path="url(#pa946d44ef4)" style="fill: #cc79a7; stroke: #000000; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 102.600144 60.280134 
+Q 102.600144 68.0396 102.600144 74.569229 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 104.800144 70.169229 
+L 102.600144 74.569229 
+L 100.400144 70.169229 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 102.600144 122.068043 
+Q 102.600144 129.827509 102.600144 136.357138 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 104.800144 131.957138 
+L 102.600144 136.357138 
+L 100.400144 131.957138 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 188.745793 154.50999 
+Q 207.179655 137.958389 224.698427 122.22844 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 219.954688 123.531106 
+L 224.698427 122.22844 
+L 222.894316 126.805031 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 188.745793 166.934025 
+Q 207.179655 183.485625 224.698427 199.215574 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 222.894316 194.638984 
+L 224.698427 199.215574 
+L 219.954688 197.912909 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 363.172071 121.256433 
+Q 381.479829 134.706012 398.796458 147.427468 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 396.552988 143.049473 
+L 398.796458 147.427468 
+L 393.94798 146.595448 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 363.108848 203.359586 
+Q 381.479604 188.364188 398.897624 174.146474 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 394.097846 175.224498 
+L 398.897624 174.146474 
+L 396.880176 178.63311 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 444.622986 189.571357 
+Q 398.90774 224.137516 354.173474 257.961936 
+" clip-path="url(#pa946d44ef4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 359.010001 257.063045 
+L 354.173474 257.961936 
+L 356.356277 253.55338 
+z
+" clip-path="url(#pa946d44ef4)" style="stroke: #000000; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(59.025144 38.20056)">Layer 0  Dosing regimen</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(73.473269 46.75581)">bolus or infusion</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(55.470144 92.400348)">Layer 1  Pharmacokinetics</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(43.910769 100.955598)">S- and R-ketamine, norketamine,</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(45.467644 109.534098)">hydroxynorketamine (calibrated)</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(50.574519 154.246757)">Layer 2  Receptor occupancy</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(56.131394 162.802007)">pyramidal and interneuron</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(67.911394 171.357257)">open-channel block</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(258.758084 101.189204)">Layer 3a  Protective</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(248.090584 109.744454)">pyramidal block raises the</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(250.747459 118.299704)">spreading depolarization</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(277.876209 126.854954)">threshold</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(267.501209 189.086825)">Layer 3b  Toxic</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(249.862459 197.642075)">interneuron block causes</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(258.084334 206.103575)">disinhibition above a</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(277.876209 214.565075)">threshold</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(419.759188 153.256127)">Layers 4 and 5</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(429.326063 161.811377)">Net injury</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(426.431688 170.366627)">and clinical</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif" transform="translate(437.110438 178.828127)">limits</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="359.069897" y="278.189087" transform="rotate(-0 359.069897 278.189087)">Emergent dose-response window</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="17.940226" y="16.008221" transform="rotate(-0 17.940226 16.008221)">Multiscale model of ketamine neuroprotection</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa946d44ef4">
+   <rect x="3.00024" y="3.00024" width="497.99952" height="325.19952"/>
+  </clipPath>
+ </defs>
+</svg>

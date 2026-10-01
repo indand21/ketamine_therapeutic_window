@@ -73,6 +73,10 @@ PYTHONPATH=. python scripts/run_prospective_design.py
 
 # 7. Publication figures  ->  figures/  (reads results/)
 PYTHONPATH=. python scripts/make_figures.py
+
+# 7b. The same figures as submitted to Pharmaceutical Research
+#     ->  figures/pharmaceutical_research/
+PYTHONPATH=. python scripts/make_figures_pharmres.py
 ```
 
 Step 2 onwards read the calibrated parameters from `src/l1_pk/config.py`, which
@@ -80,6 +84,26 @@ step 1 produces. Step 7 depends on the preceding steps having written the
 corresponding `results/` files. `scripts/run_robustness.py` is retained but
 superseded by `run_identifiability.py`, which answers the same question exactly
 rather than by sampling.
+
+### Figure numbering in the submitted manuscript
+
+The manuscript submitted to *Pharmaceutical Research* uses the figures in
+`figures/pharmaceutical_research/`, produced by `scripts/make_figures_pharmres.py`
+from the same `results/` files. They match the figures in `figures/` except that
+units are written as mg/kg and mg/L and that Figs. 4 and 5 are swapped, because
+the journal numbers figures in order of first citation:
+
+| Manuscript figure | Content | `figures/pharmaceutical_research/` | `figures/` |
+|---|---|---|---|
+| Fig. 1 | Model structure | `fig1_schematic` | `fig1_schematic` |
+| Fig. 2 | PK calibration and held-out evaluation | `fig2_pk_calibration` | `fig2_pk_calibration` |
+| Fig. 3 | Dose-response window | `fig3_window` | `fig3_window` |
+| Fig. 4 | Identifiability of the injury coefficients | `fig4_identifiability` | `fig5_identifiability` |
+| Fig. 5 | Regimen and trial arms | `fig5_regimen_podcast` | `fig4_regimen_podcast` |
+| Figs. S1, S2 | Virtual population and CYP2B6; Sobol sensitivity | `figS1_vpop_cyp2b6`, `figS2_sobol` | same names |
+
+The git tag `pharmres-submission` marks the code and results that correspond to
+the submitted manuscript.
 
 ## Tests
 
@@ -112,8 +136,12 @@ tests/                     unit and property tests
 
 ## Citation
 
-This code accompanies a manuscript describing the model (in preparation). Please cite
-the corresponding publication when using this software.
+This code accompanies the manuscript "Bounding what cannot be calibrated: linear
+identifiability and exhaustive coefficient sweeps in a quantitative systems
+pharmacology model of ketamine's neuroprotective dose window" (Mishra N, Anil A,
+Archana AS, Keerthy SU, Srinivasan A), submitted to *Pharmaceutical Research*.
+Please cite the publication once available; until then, cite this repository and
+the `pharmres-submission` tag.
 
 ## License
 
