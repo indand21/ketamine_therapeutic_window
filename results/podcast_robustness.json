@@ -1,0 +1,154 @@
+{
+  "bbb_speed_factor": 0.283,
+  "psych_model": "hill",
+  "conditions": {
+    "model_default_temme": {
+      "s_to_r_ratio": 1.3636,
+      "arms": {
+        "0.5": {
+          "bolus_I": 79.13532811270412,
+          "infusion_8h_I": 58.01899842166195,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 29.3935339939706,
+          "infusion_pct_above_baseline": -5.1336056397263015,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.45
+        },
+        "1.0": {
+          "bolus_I": 184.7576073205035,
+          "infusion_8h_I": 55.29651955613285,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 202.09566717690004,
+          "infusion_pct_above_baseline": -9.58510878043487,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.45
+        }
+      }
+    },
+    "dahan2024_point_1.9": {
+      "s_to_r_ratio": 1.923,
+      "arms": {
+        "0.5": {
+          "bolus_I": 70.48271862419091,
+          "infusion_8h_I": 58.392770083193746,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 15.245722306199895,
+          "infusion_pct_above_baseline": -4.522454623538962,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": false,
+          "window_upper": 0.55
+        },
+        "1.0": {
+          "bolus_I": 155.88895950966776,
+          "infusion_8h_I": 55.95452297593692,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 154.89277497998665,
+          "infusion_pct_above_baseline": -8.509212718598768,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.55
+        }
+      }
+    },
+    "dahan2024_ci_equipotent": {
+      "s_to_r_ratio": 0.99,
+      "arms": {
+        "0.5": {
+          "bolus_I": 92.85822273715726,
+          "infusion_8h_I": 57.54394543525387,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 51.831727837761576,
+          "infusion_pct_above_baseline": -5.910360929831215,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.4
+        },
+        "1.0": {
+          "bolus_I": 222.39214976760798,
+          "infusion_8h_I": 54.47423399188679,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 263.63160268905955,
+          "infusion_pct_above_baseline": -10.929621245948272,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.4
+        }
+      }
+    },
+    "dahan2024_ci_weak_R": {
+      "s_to_r_ratio": 5.556,
+      "arms": {
+        "0.5": {
+          "bolus_I": 61.78434560893076,
+          "infusion_8h_I": 59.002712249738046,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 1.0230830465338236,
+          "infusion_pct_above_baseline": -3.525143127607522,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": false,
+          "window_upper": 0.7
+        },
+        "1.0": {
+          "bolus_I": 112.00486068201039,
+          "infusion_8h_I": 57.05002559217589,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 83.138240451941,
+          "infusion_pct_above_baseline": -6.717965264453884,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.7
+        }
+      }
+    },
+    "olofsen2022_R_inert": {
+      "s_to_r_ratio": "inert",
+      "arms": {
+        "0.5": {
+          "bolus_I": 60.01756935833731,
+          "infusion_8h_I": 59.3328583619726,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": -1.865758489768632,
+          "infusion_pct_above_baseline": -2.9853238937053272,
+          "bolus_net_harmful": false,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": false,
+          "window_upper": 0.85
+        },
+        "1.0": {
+          "bolus_I": 91.40961029973107,
+          "infusion_8h_I": 57.65466744679236,
+          "no_drug_I": 61.15864191203836,
+          "bolus_pct_above_baseline": 49.46311337521405,
+          "infusion_pct_above_baseline": -5.7293202656226505,
+          "bolus_net_harmful": true,
+          "infusion_net_harmful": false,
+          "bolus_worse_than_infusion": true,
+          "dose_above_window_upper": true,
+          "window_upper": 0.85
+        }
+      }
+    }
+  },
+  "claim_A_dose_above_window_always": false,
+  "claim_A_holds_fraction": 0.7,
+  "claim_B_bolus_harmful_and_worse_always": false
+}

@@ -12,7 +12,9 @@ where:
     P_open_p = state-dependent open probability (voltage + glutamate gate)
     k_on_p, k_off_p = population-specific association/dissociation constants
 
-Enantiomer-specific affinity (S ≈ 3-4× R) enters via k_on:
+Enantiomer-specific affinity enters via k_on (S:R ≈ 1.2-1.5 from the PCP-site
+binding constants of Temme 2018, not the 3-4x sometimes quoted; see NMDARParams
+and docs/L2_Parameter_Provenance.md):
     k_on_eff = k_on_S * C_ecf_S + k_on_R * C_ecf_R
 
 Population segregation: pyramidal (GluN2A-dominant) vs interneuron

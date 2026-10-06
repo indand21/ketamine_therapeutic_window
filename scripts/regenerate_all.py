@@ -130,7 +130,7 @@ def make_l1_params(cl_scale: float = 1.0, pk_cl: float = 1.0, pk_vd: float = 1.0
 
 
 def run_full_stack(regimen, params=None, t_end=T_END, n_points=N_POINTS,
-                   ablate_l3b=False, clinical_params=None):
+                   ablate_l3b=False, clinical_params=None, l2_params=None):
     """Run L0->L5 for a given regimen. Returns summary metrics + time courses."""
     if params is None:
         params = default_parameters()
@@ -141,7 +141,7 @@ def run_full_stack(regimen, params=None, t_end=T_END, n_points=N_POINTS,
         return None
 
     r2 = simulate_occupancy(t, r1.brain_ecf("KET_S"), r1.brain_ecf("KET_R"),
-                            DEFAULT_L2_PARAMS)
+                            DEFAULT_L2_PARAMS if l2_params is None else l2_params)
     r3a = simulate_sd_dynamics(t, r2["pyr"], DEFAULT_SD_PARAMS)
     r3b = simulate_nrhypo(t, r2["int"], DEFAULT_NRHYPPO_PARAMS)
 
