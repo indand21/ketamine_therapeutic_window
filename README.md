@@ -73,11 +73,32 @@ PYTHONPATH=. python scripts/run_prospective_design.py
 
 # 7. Publication figures  ->  figures/  (reads results/)
 PYTHONPATH=. python scripts/make_figures.py
-
-# 7b. The same figures as submitted to Pharmaceutical Research
-#     ->  figures/pharmaceutical_research/
-PYTHONPATH=. python scripts/make_figures_pharmres.py
 ```
+
+The model's predictions are then tested against human pharmacodynamic estimates that
+took no part in building it (Olofsen et al., Anesthesiology 2022;136:792-801, from the
+same volunteers that supplied the calibration data). These run on the model as it
+stands, without refitting anything:
+
+```bash
+# transfer-clearance scale factor reproducing the measured t1/2ke0 of 8.3 min
+PYTHONPATH=. python scripts/calibrate_bbb_speed.py
+
+# regimen comparison and dose response under the human-constrained settings
+PYTHONPATH=. python scripts/run_human_constrained.py
+
+# S:R potency sweep spanning the published human estimates
+PYTHONPATH=. python scripts/run_enantiomer_ratio.py
+
+# the trial arms evaluated across that sweep
+PYTHONPATH=. python scripts/run_podcast_robustness.py
+```
+
+Two switches control them, both defaulting to the original behaviour so the main
+analysis reproduces unchanged: `Clearances.bbb_speed_factor`, which scales all four
+blood-brain transfer clearances and leaves the unbound partition coefficient
+unchanged, and `ClinicalParams.psych_model`, which selects the illustrative linear
+ramp or the published sigmoid.
 
 Step 2 onwards read the calibrated parameters from `src/l1_pk/config.py`, which
 step 1 produces. Step 7 depends on the preceding steps having written the
@@ -85,25 +106,12 @@ corresponding `results/` files. `scripts/run_robustness.py` is retained but
 superseded by `run_identifiability.py`, which answers the same question exactly
 rather than by sampling.
 
-### Figure numbering in the submitted manuscript
+### Figure numbering
 
-The manuscript submitted to *Pharmaceutical Research* uses the figures in
-`figures/pharmaceutical_research/`, produced by `scripts/make_figures_pharmres.py`
-from the same `results/` files. They match the figures in `figures/` except that
-units are written as mg/kg and mg/L and that Figs. 4 and 5 are swapped, because
-the journal numbers figures in order of first citation:
-
-| Manuscript figure | Content | `figures/pharmaceutical_research/` | `figures/` |
-|---|---|---|---|
-| Fig. 1 | Model structure | `fig1_schematic` | `fig1_schematic` |
-| Fig. 2 | PK calibration and held-out evaluation | `fig2_pk_calibration` | `fig2_pk_calibration` |
-| Fig. 3 | Dose-response window | `fig3_window` | `fig3_window` |
-| Fig. 4 | Identifiability of the injury coefficients | `fig4_identifiability` | `fig5_identifiability` |
-| Fig. 5 | Regimen and trial arms | `fig5_regimen_podcast` | `fig4_regimen_podcast` |
-| Figs. S1, S2 | Virtual population and CYP2B6; Sobol sensitivity | `figS1_vpop_cyp2b6`, `figS2_sobol` | same names |
-
-The git tag `pharmres-submission` marks the code and results that correspond to
-the submitted manuscript.
+Figures are numbered in order of first citation, so Fig. 4 is the identifiability
+figure and Fig. 5 the regimen figure. `scripts/make_figures.py` writes them with the
+units and spelling the target journal asks for (mg kg^-1 rather than mg/kg, UK
+spelling).
 
 ## Tests
 
@@ -136,12 +144,10 @@ tests/                     unit and property tests
 
 ## Citation
 
-This code accompanies the manuscript "Bounding what cannot be calibrated: linear
-identifiability and exhaustive coefficient sweeps in a quantitative systems
-pharmacology model of ketamine's neuroprotective dose window" (Mishra N, Anil A,
-Archana AS, Keerthy SU, Srinivasan A), submitted to *Pharmaceutical Research*.
-Please cite the publication once available; until then, cite this repository and
-the `pharmres-submission` tag.
+This code accompanies the manuscript "The delivery regimen, not the dose: a ketamine
+systems pharmacology model tested against independent human pharmacodynamic data"
+(Mishra N, Anil A, Archana AS, Keerthy SU, Srinivasan A), under submission. Please
+cite the publication once available; until then, cite this repository.
 
 ## License
 

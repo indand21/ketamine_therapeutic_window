@@ -6,7 +6,8 @@ vector artwork. Transparency is avoided throughout because EPS does not
 support it.
 
 Units and spelling follow the target journal: concentrations in mg l^-1, doses
-in mg kg^-1, UK spelling.
+in mg kg^-1 (the solidus is avoided), UK spelling. Figures are numbered in order
+of first citation, so Fig. 4 is identifiability and Fig. 5 the regimen.
 
 Run with:  PYTHONPATH=. python scripts/make_figures.py
 """
@@ -389,7 +390,7 @@ def fig4_regimen():
                  linewidth=1.2)
         ax2.set_ylabel("Psychotomimetic burden", color=CB["purple"])
     panel_label(ax, "B", "Trial arms reproduced")
-    save(fig, "fig4_regimen_podcast")
+    save(fig, "fig5_regimen_podcast")
 
 
 # ---------------------------------------------------------------------------
@@ -466,7 +467,7 @@ def fig5_identifiability():
     ax.set_xlabel("Critical toxic weight Γ/α")
     ax.set_ylabel("Coefficient sets")
     panel_label(ax, "C", "Critical versus nominal\ntoxic weight")
-    save(fig, "fig5_identifiability")
+    save(fig, "fig4_identifiability")
 
 
 # ---------------------------------------------------------------------------
