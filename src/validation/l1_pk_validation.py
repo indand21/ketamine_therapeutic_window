@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 
 from src.l1_pk import L1Model, DosingRegimen, DoseEvent, InfusionSegment
 from src.l1_pk.config import L1Parameters, Clearances, default_parameters
+from src.numeric_compat import trapezoid
 
 # ---------------------------------------------------------------------------
 # Reference subject
@@ -161,7 +162,7 @@ DEFAULT_REF = PKReference()
 
 def compute_auc(t: np.ndarray, c: np.ndarray) -> float:
     """AUC₀₋ₜ via trapezoidal rule [mg·h/L]."""
-    return float(np.trapz(c, t))
+    return float(trapezoid(c, t))
 
 
 def compute_auc_extrapolated(

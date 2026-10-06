@@ -12,6 +12,7 @@ from src.l1_pk import L1Model, DosingRegimen, DoseEvent
 from src.l1_pk.config import default_parameters, ENANTIOMERS
 from src.l1_pk.model import N_STATES
 from src.verification import check_unit_consistency
+from src.numeric_compat import trapezoid
 
 
 @pytest.fixture
@@ -94,6 +95,6 @@ def test_enantioselective_clearance_effect(open_model):
     result = open_model.simulate(racemic, 24.0,
                                  t_eval=np.linspace(0, 24, 400))
     assert result.success
-    auc_s = np.trapz(result.concentration("KET_S", "cen"), result.t)
-    auc_r = np.trapz(result.concentration("KET_R", "cen"), result.t)
+    auc_s = trapezoid(result.concentration("KET_S", "cen"), result.t)
+    auc_r = trapezoid(result.concentration("KET_R", "cen"), result.t)
     assert auc_r > auc_s

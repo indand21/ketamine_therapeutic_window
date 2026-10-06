@@ -22,6 +22,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import numpy as np
 from scipy.integrate import solve_ivp
+from src.numeric_compat import trapezoid
 
 
 @dataclass(frozen=True)
@@ -179,7 +180,7 @@ def compute_sd_burden(
 
     # Burden integrand: λ_SD * D_SD [events·min/h]
     integrand = lambda_t * D_t
-    burden = float(np.trapz(integrand, t_h))
+    burden = float(trapezoid(integrand, t_h))
 
     return {
         "burden": burden,

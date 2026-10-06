@@ -45,6 +45,7 @@ from src.l1_pk.config import default_parameters
 from src.l2_occupancy import simulate_occupancy, DEFAULT_L2_PARAMS
 from src.l3b_nrhypo import DEFAULT_NRHYPPO_PARAMS
 from src.l4_l5.injury import compute_clinical_constraints
+from src.numeric_compat import trapezoid
 
 RESULTS = Path("results")
 RESULTS.mkdir(parents=True, exist_ok=True)
@@ -98,8 +99,8 @@ def arm_exposure(spec):
         "peak_B_pyr": float(np.max(r2["pyr"])),
         "peak_B_int": float(np.max(b_int)),
         "crosses_toxic_threshold": bool(np.max(b_int) > THETA),
-        "hours_above_threshold": float(np.trapz((b_int > THETA).astype(float), t)),
-        "supra_threshold_exposure": float(np.trapz(excess ** 2, t)),
+        "hours_above_threshold": float(trapezoid((b_int > THETA).astype(float), t)),
+        "supra_threshold_exposure": float(trapezoid(excess ** 2, t)),
         "peak_psychotomimetic_burden": float(np.max(r5["psych_burden"])),
     }
 

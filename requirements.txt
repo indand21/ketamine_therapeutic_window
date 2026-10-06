@@ -1,4 +1,4 @@
-numpy>=1.24
+numpy>=1.24  # NumPy 2 supported via src/numeric_compat.py
 scipy>=1.10
 matplotlib>=3.7
 SALib>=1.4

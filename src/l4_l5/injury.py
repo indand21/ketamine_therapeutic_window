@@ -30,6 +30,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import numpy as np
 from scipy.integrate import solve_ivp
+from src.numeric_compat import trapezoid
 
 
 @dataclass(frozen=True)
@@ -197,8 +198,8 @@ def simulate_injury(
         "toxicity": toxicity,
         "t": t_h,
         "I_final": float(I_t[-1]),
-        "protection_total": float(np.trapz(protection, t_h)),
-        "toxicity_total": float(np.trapz(toxicity, t_h)),
+        "protection_total": float(trapezoid(protection, t_h)),
+        "toxicity_total": float(trapezoid(toxicity, t_h)),
     }
 
 
@@ -233,7 +234,7 @@ def compute_clinical_constraints(
         "CPP": CPP,
         "CPP_violated": CPP_violated,
         "psych_burden": psych,
-        "psych_integral": float(np.trapz(psych, np.linspace(0, 1, len(psych)))),
+        "psych_integral": float(trapezoid(psych, np.linspace(0, 1, len(psych)))),
     }
 
 

@@ -70,6 +70,7 @@ from src.l3a_sd.model import compute_sd_rate, compute_sd_duration
 from src.l3b_nrhypo import simulate_nrhypo, DEFAULT_NRHYPPO_PARAMS
 from src.l3b_nrhypo.model import compute_g
 from src.l4_l5.injury import simulate_injury, DEFAULT_INJURY_PARAMS
+from src.numeric_compat import trapezoid
 
 RESULTS = Path("results")
 RESULTS.mkdir(parents=True, exist_ok=True)
@@ -156,12 +157,12 @@ def basis_integrals(pre, kappa_grid, theta_grid, n_exp=2.0):
         lam = np.array([compute_sd_rate(b, sd_p) for b in B_pyr])
         dur = np.array([compute_sd_duration(b, sd_p) for b in B_pyr])
         phi = lam * dur * (1.0 + glu)
-        P[i] = np.trapz(phi, t)
-        Q[i] = np.trapz(B_pyr * phi, t)
+        P[i] = trapezoid(phi, t)
+        Q[i] = trapezoid(B_pyr * phi, t)
 
     R = np.empty(len(theta_grid))
     for j, th in enumerate(theta_grid):
-        R[j] = np.trapz(np.maximum(0.0, B_int - th) ** n_exp, t)
+        R[j] = trapezoid(np.maximum(0.0, B_int - th) ** n_exp, t)
 
     return P, Q, R
 
@@ -196,9 +197,9 @@ def verify_linearity(pre, rng, n_checks=12):
         i_ode = float(full["I_final"])
 
         phi = sd_rate * (1.0 + glu)
-        P = np.trapz(phi, t)
-        Q = np.trapz(B_pyr * phi, t)
-        R = np.trapz(np.maximum(0.0, B_int - theta) ** nr_p.g_exponent, t)
+        P = trapezoid(phi, t)
+        Q = trapezoid(B_pyr * phi, t)
+        R = trapezoid(np.maximum(0.0, B_int - theta) ** nr_p.g_exponent, t)
         i_lin = alpha * P - beta * Q + gamma * g_gain * R
 
         errors.append(abs(i_lin - i_ode) / max(abs(i_ode), 1e-12))

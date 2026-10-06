@@ -27,6 +27,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import numpy as np
 from scipy.integrate import solve_ivp
+from src.numeric_compat import trapezoid
 
 
 @dataclass(frozen=True)
@@ -227,4 +228,4 @@ def compute_nrhypo_burden(
         Total NRHypo injury burden [dimensionless, cumulative].
     """
     injury_rate = np.array([compute_g(b, params) for b in B_int])
-    return float(np.trapz(injury_rate, t_h))
+    return float(trapezoid(injury_rate, t_h))

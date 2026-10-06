@@ -47,6 +47,7 @@ from src.l2_occupancy.p_open import POpenParams
 from src.l3a_sd import DEFAULT_SD_PARAMS
 from src.l3a_sd.model import compute_sd_rate, compute_sd_duration
 from src.l3b_nrhypo import simulate_nrhypo, DEFAULT_NRHYPPO_PARAMS
+from src.numeric_compat import trapezoid
 
 RESULTS = Path("results")
 RESULTS.mkdir(parents=True, exist_ok=True)
@@ -137,9 +138,9 @@ def forward(x, dose=DOSE):
     phi = lam * dur * (1.0 + glu)
 
     n_exp = DEFAULT_NRHYPPO_PARAMS.g_exponent
-    P = np.trapz(phi, t)
-    Q = np.trapz(B_pyr * phi, t)
-    R = np.trapz(np.maximum(0.0, B_int - b_int_thresh) ** n_exp, t)
+    P = trapezoid(phi, t)
+    Q = trapezoid(B_pyr * phi, t)
+    R = trapezoid(np.maximum(0.0, B_int - b_int_thresh) ** n_exp, t)
     return float(alpha * P - beta * Q + gamma * g_gain * R)
 
 
