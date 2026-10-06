@@ -101,6 +101,7 @@ def qsp_forward(params: np.ndarray, dose: float = 0.5) -> dict:
             CL_met_HNK=l1_params.clearances.CL_met_HNK,
             CL_other_NK=l1_params.clearances.CL_other_NK,
             CL_out_HNK=cl_out_hnk,
+            bbb_speed_factor=cl.bbb_speed_factor,
         ),
     )
 

@@ -130,6 +130,7 @@ def apply_calibration_vector(
         CL_met_HNK={"S": cl_met_hnk_s, "R": cl_met_hnk_r},
         CL_other_NK={"S": cl_other_nk_s, "R": cl_other_nk_r},
         CL_out_HNK=cl_out_hnk,
+        bbb_speed_factor=cl.bbb_speed_factor,
     )
 
     new_volumes = CompartmentVolumes(

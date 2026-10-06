@@ -66,6 +66,8 @@ class ClinicalParams:
     - ICP_neutral: boolean (ICP neutral per Carlson)
     - psych_threshold: mg/L (brain concentration for psychotomimetic onset)
     - psych_max: mg/L (brain concentration for severe psychotomimetic)
+    - psych_model: "linear" (illustrative ramp) or "hill" (human-calibrated)
+    - psych_C50 / psych_gamma: sigmoid Emax parameters on brain ECF concentration
     """
 
     # CPP/MAP constraints
@@ -77,9 +79,24 @@ class ClinicalParams:
     # ICP: neutral per Carlson 2018/2019
     ICP_neutral: bool = True
 
-    # Psychotomimetic burden
-    psych_threshold: float = 0.02  # mg/L brain ECF (onset)
-    psych_max: float = 0.10  # mg/L brain ECF (severe)
+    # Psychotomimetic burden.
+    #
+    # "linear": the original illustrative clipped ramp between psych_threshold
+    # and psych_max.
+    #
+    # "hill": sigmoid Emax calibrated to human data. Olofsen et al.,
+    # Anesthesiology 2022;136:792-801 (PMID 35188952) modelled external
+    # perception (Bowdle visual analogue scale) in the same 17 volunteers whose
+    # arterial concentrations calibrate layer 1, and reported, for S-ketamine,
+    # C50 = 0.51 (95% CI 0.38 to 0.66) nmol/ml effect-site and a Hill
+    # coefficient of 5.33. Converting with the ketamine molar mass of 237.725
+    # g/mol and the unbound brain partition coefficient Kp,uu = 0.6 gives
+    # C50 = 0.0727 (0.0542 to 0.0941) mg/L brain ECF.
+    psych_model: str = "linear"
+    psych_threshold: float = 0.02  # mg/L brain ECF (onset); "linear" only
+    psych_max: float = 0.10  # mg/L brain ECF (severe); "linear" only
+    psych_C50: float = 0.0727  # mg/L brain ECF; "hill" only (Olofsen 2022)
+    psych_gamma: float = 5.33  # Hill coefficient; "hill" only (Olofsen 2022)
     psych_weight: float = 1.0  # weight in objective
 
 
@@ -223,11 +240,19 @@ def compute_clinical_constraints(
     CPP = MAP  # simplified: CPP ≈ MAP (ICP neutral)
     CPP_violated = CPP < params.CPP_min
 
-    # Psychotomimetic burden: Emax-like function of C_brain
-    psych = np.clip(
-        (C_brain - params.psych_threshold) / (params.psych_max - params.psych_threshold),
-        0.0, 1.0,
-    )
+    # Psychotomimetic burden as a function of C_brain.
+    if params.psych_model == "hill":
+        C = np.clip(np.asarray(C_brain, dtype=float), 0.0, None)
+        num = C ** params.psych_gamma
+        psych = num / (num + params.psych_C50 ** params.psych_gamma)
+    elif params.psych_model == "linear":
+        psych = np.clip(
+            (C_brain - params.psych_threshold)
+            / (params.psych_max - params.psych_threshold),
+            0.0, 1.0,
+        )
+    else:
+        raise ValueError(f"unknown psych_model: {params.psych_model!r}")
 
     return {
         "MAP": MAP,

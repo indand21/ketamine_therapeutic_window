@@ -118,6 +118,7 @@ def make_l1_params(cl_scale: float = 1.0, pk_cl: float = 1.0, pk_vd: float = 1.0
         CL_met_HNK=cl.CL_met_HNK,
         CL_other_NK=cl.CL_other_NK,
         CL_out_HNK=cl.CL_out_HNK,
+        bbb_speed_factor=cl.bbb_speed_factor,
     )
     new_vol = CompartmentVolumes(
         V_cen=p.volumes.V_cen * pk_vd,
@@ -129,7 +130,7 @@ def make_l1_params(cl_scale: float = 1.0, pk_cl: float = 1.0, pk_vd: float = 1.0
 
 
 def run_full_stack(regimen, params=None, t_end=T_END, n_points=N_POINTS,
-                   ablate_l3b=False):
+                   ablate_l3b=False, clinical_params=None):
     """Run L0->L5 for a given regimen. Returns summary metrics + time courses."""
     if params is None:
         params = default_parameters()
@@ -157,7 +158,8 @@ def run_full_stack(regimen, params=None, t_end=T_END, n_points=N_POINTS,
 
     r4 = simulate_injury(t, r2["pyr"], r2["int"], sd_rate, glu_excess, nrhypo_rate)
     c_brain = r1.brain_ecf("KET_S") + r1.brain_ecf("KET_R")
-    r5 = compute_clinical_constraints(c_brain)
+    r5 = (compute_clinical_constraints(c_brain) if clinical_params is None
+          else compute_clinical_constraints(c_brain, clinical_params))
 
     return {
         "t": t, "r1": r1, "r2": r2, "r3a": r3a, "r3b": r3b, "r4": r4, "r5": r5,

@@ -198,6 +198,7 @@ def build_params(theta):
             CL_met_HNK=cl_nk,
             CL_other_NK={"S": 0.0, "R": 0.0},
             CL_out_HNK=v["CL_out_HNK"],
+            bbb_speed_factor=cl.bbb_speed_factor,
         ),
         fractions=MetaboliteFractions(f_m=v["f_NK"], f_m_HNK=v["f_HNK"]),
     )

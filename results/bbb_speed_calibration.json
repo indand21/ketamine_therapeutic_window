@@ -1,0 +1,17 @@
+{
+  "target_t_half_ke0_min": 8.3,
+  "target_95CI_min": [
+    5.1,
+    13.0
+  ],
+  "source": "Olofsen E, Kamp J, Henthorn TK, van Velzen M, Niesters M, Sarton E, Dahan A. Ketamine psychedelic and antinociceptive effects are connected. Anesthesiology. 2022;136(5):792-801. PMID 35188952; doi:10.1097/ALN.0000000000004176",
+  "model_t_half_default_min": 2.349,
+  "bbb_speed_factor": 0.283,
+  "bbb_speed_factor_95CI": [
+    0.1807,
+    0.4606
+  ],
+  "fold_too_fast_before": 3.53,
+  "t_half_after_min": 8.3,
+  "Kp_uu_after": 0.6004
+}

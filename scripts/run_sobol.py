@@ -105,6 +105,7 @@ def forward(x, dose=DOSE):
             CL_met_NK=cl.CL_met_NK, CL_other_parent=cl.CL_other_parent,
             CL_met_HNK=cl.CL_met_HNK, CL_other_NK=cl.CL_other_NK,
             CL_out_HNK=cl_out_hnk,
+            bbb_speed_factor=cl.bbb_speed_factor,
         ),
     )
     reg = DosingRegimen(

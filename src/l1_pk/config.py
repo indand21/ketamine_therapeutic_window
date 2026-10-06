@@ -86,13 +86,43 @@ class Clearances:
     the calibration and feeds no downstream layer. See docs/L1_Calibration.md.
     """
 
-    # BBB transfer central <-> brain_vasc. FIXED, not identified by any data.
-    # Kp,uu decomposition: (CL_in/CL_out)×(CL_ecf_in/CL_ecf_out) = 0.60
+    # Blood-brain transfer, central <-> brain vascular <-> brain ECF.
+    #
+    # Their RATIOS set the unbound partition coefficient, which is fixed from
+    # paired cerebrospinal fluid data (Moaddel 2023):
+    #     Kp,uu = (CL_in/CL_out) x (CL_ecf_in/CL_ecf_out) = 0.60
+    # Their MAGNITUDES set how fast brain ECF tracks plasma, and are scaled by
+    # bbb_speed_factor below without changing Kp,uu.
     CL_in: dict[str, float] = field(default_factory=lambda: {"S": 5.0, "R": 5.0})
     CL_out: dict[str, float] = field(default_factory=lambda: {"S": 6.25, "R": 6.25})
-    # BBB transfer brain_vasc <-> ecf. FIXED.
     CL_ecf_in: dict[str, float] = field(default_factory=lambda: {"S": 4.0, "R": 4.0})
     CL_ecf_out: dict[str, float] = field(default_factory=lambda: {"S": 5.33, "R": 5.33})
+
+    # Multiplies all four transfer clearances above. Kp,uu is invariant to it;
+    # the plasma-to-brain-ECF equilibration half-time scales as 1/factor.
+    #
+    #   1.0  (default): 2.35 min, the original unconstrained value.
+    #   0.283         : 8.3 min, matching the blood-effect-site equilibration
+    #                   half-life measured for the ketamine psychedelic and
+    #                   antinociceptive endpoints in the same volunteers whose
+    #                   arterial concentrations calibrate this layer
+    #                   (Olofsen et al., Anesthesiology 2022;136:792-801,
+    #                   t1/2ke0 8.3 min, 95% CI 5.1 to 13.0; PMID 35188952).
+    #
+    # t1/2ke0 is a lumped plasma-to-effect delay, so attributing all of it to
+    # blood-brain transfer is an upper bound on how slow that step can be:
+    # receptor binding in layer 2 adds a further few tenths of a minute.
+    bbb_speed_factor: float = 1.0
+
+    def transfer(self, name: str) -> dict[str, float]:
+        """Return a blood-brain transfer clearance scaled by bbb_speed_factor.
+
+        name is one of CL_in, CL_out, CL_ecf_in, CL_ecf_out. Scaling all four
+        together leaves Kp,uu unchanged and alters only the equilibration rate.
+        """
+        if name not in ("CL_in", "CL_out", "CL_ecf_in", "CL_ecf_out"):
+            raise ValueError(f"not a blood-brain transfer clearance: {name!r}")
+        return {k: v * self.bbb_speed_factor for k, v in getattr(self, name).items()}
     # Total parent clearance, routed entirely through the N-demethylation node;
     # the fraction f_m of it forms norketamine (see MetaboliteFractions). This
     # parameterisation keeps parent elimination and metabolite formation

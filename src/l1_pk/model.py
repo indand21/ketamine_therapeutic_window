@@ -93,27 +93,30 @@ class L1Model:
 
             # --- Parent ketamine (TechSpec §3.2) ---
             dist = p.flows.Q_per * (c_ket_per - c_ket_cen)
-            bbb = -cl.CL_in[e] * c_ket_cen + cl.CL_out[e] * c_ket_vasc
+            # Blood-brain transfer scaled by bbb_speed_factor (Kp,uu invariant).
+            cl_in, cl_out = cl.transfer("CL_in")[e], cl.transfer("CL_out")[e]
+            cl_ei, cl_eo = cl.transfer("CL_ecf_in")[e], cl.transfer("CL_ecf_out")[e]
+            bbb = -cl_in * c_ket_cen + cl_out * c_ket_vasc
             met_nk = cl.CL_met_NK[e] * c_ket_cen
             elim_other_parent = cl.CL_other_parent[e] * c_ket_cen
             add(ket, "cen", regimen.input_rate(t, e) + dist + bbb - met_nk - elim_other_parent)
             add(ket, "per", -dist)
             # BBB chain cen -> vasc -> ecf (reversible; TechSpec §3.2-§3.3).
-            v_in = cl.CL_in[e] * c_ket_cen - cl.CL_out[e] * c_ket_vasc
-            ecf_flux = cl.CL_ecf_in[e] * c_ket_vasc - cl.CL_ecf_out[e] * c_ket_ecf
+            v_in = cl_in * c_ket_cen - cl_out * c_ket_vasc
+            ecf_flux = cl_ei * c_ket_vasc - cl_eo * c_ket_ecf
             add(ket, "vasc", v_in - ecf_flux)
             add(ket, "ecf", ecf_flux)
 
             # --- Norketamine (TechSpec §3.2) ---
             nk_dist = p.flows.Q_per * (c_nk_per - c_nk_cen)
-            nk_bbb = -cl.CL_in[e] * c_nk_cen + cl.CL_out[e] * c_nk_vasc
+            nk_bbb = -cl_in * c_nk_cen + cl_out * c_nk_vasc
             form_nk = p.fractions.f_m * met_nk
             elim_hnk = cl.CL_met_HNK[e] * c_nk_cen
             elim_other = cl.CL_other_NK[e] * c_nk_cen
             add(nk, "cen", form_nk + nk_dist + nk_bbb - elim_hnk - elim_other)
             add(nk, "per", -nk_dist)
-            nk_v_in = cl.CL_in[e] * c_nk_cen - cl.CL_out[e] * c_nk_vasc
-            nk_ecf = cl.CL_ecf_in[e] * c_nk_vasc - cl.CL_ecf_out[e] * c_nk_ecf
+            nk_v_in = cl_in * c_nk_cen - cl_out * c_nk_vasc
+            nk_ecf = cl_ei * c_nk_vasc - cl_eo * c_nk_ecf
             add(nk, "vasc", nk_v_in - nk_ecf)
             add(nk, "ecf", nk_ecf)
 
